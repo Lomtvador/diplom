@@ -1,0 +1,15 @@
+label,
+input,
+button {
+    display: block;
+}
+
+input,
+button {
+    margin: 20px 0px;
+    padding: 10px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}

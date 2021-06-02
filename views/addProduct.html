@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Магазин</title>
+    <!-- стили -->
+    %s
+    <style>
+        label,
+        input {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="header">
+            <!-- navigation -->
+            %s
+            <!-- adminNavigation -->
+            %s
+        </div>
+        <div class="pageWrap">
+            <form method="post" enctype="multipart/form-data">
+                <label for="type">Тип</label>
+                <input type="number" name="type" id="type">
+                <label for="pageCount">Количество страниц</label>
+                <input type="number" name="pageCount" id="pageCount">
+                <label for="publisher">Издатель</label>
+                <input type="text" name="publisher" id="publisher">
+                <label for="titleRussian">Название на русском языке</label>
+                <input type="text" name="titleRussian" id="titleRussian">
+                <label for="titleOriginal">Название на оригинальном языке</label>
+                <input type="text" name="titleOriginal" id="titleOriginal">
+                <label for="author">Автор(ы)</label>
+                <input type="text" name="author" id="author">
+                <label for="artist">Художник(и)</label>
+                <input type="text" name="artist" id="artist">
+                <label for="publicationDate">Дата выхода</label>
+                <input type="date" name="publicationDate" id="publicationDate">
+                <label for="rating">Возрастное ограничение</label>
+                <input type="number" name="rating" id="rating">
+                <label for="price1">Цена в рублях</label>
+                <input type="number" name="price1" id="price1">
+                <label for="price2">Цена в копейках</label>
+                <input type="number" name="price2" id="price2">
+                <label for="description">Краткое описание</label>
+                <input type="text" name="description" id="description">
+                <label for="language">Язык</label>
+                <input type="text" name="language" id="language">
+                <label for="category">Категория</label>
+                <input type="text" name="category" id="category">
+                <label for="image">Изображение</label>
+                <input type="file" name="image" id="image">
+                <label for="file">Файл с продуктом</label>
+                <input type="file" name="file" id="file">
+                <input type="submit" value="Добавить">
+            </form>
+        </div>
+        <div class="footer"></div>
+    </div>
+</body>
+
+</html>
