@@ -17,9 +17,44 @@
             %s
         </div>
         <div class="pageWrap">
-            <h1>Управление товарами</h1>
-            <!-- productsTable -->
-            %s
+            <form method="post" enctype="multipart/form-data">
+                <label for="id">Идентификатор</label>
+                <input type="number" name="id" id="id" value="%s">
+                <input type="submit" name="submitId" value="Подтвердить">
+                <label for="type">Тип</label>
+                <input type="number" name="type" id="type" value="%s">
+                <label for="pageCount">Количество страниц</label>
+                <input type="number" name="pageCount" id="pageCount" value="%s">
+                <label for="publisher">Издатель</label>
+                <input type="text" name="publisher" id="publisher" value="%s">
+                <label for="titleRussian">Название на русском языке</label>
+                <input type="text" name="titleRussian" id="titleRussian" value="%s">
+                <label for="titleOriginal">Название на оригинальном языке</label>
+                <input type="text" name="titleOriginal" id="titleOriginal" value="%s">
+                <label for="author">Автор(ы)</label>
+                <input type="text" name="author" id="author" value="%s">
+                <label for="artist">Художник(и)</label>
+                <input type="text" name="artist" id="artist" value="%s">
+                <label for="publicationDate">Дата выхода</label>
+                <input type="date" name="publicationDate" id="publicationDate" value="%s">
+                <label for="rating">Возрастное ограничение</label>
+                <input type="number" name="rating" id="rating" value="%s">
+                <label for="price1">Цена в рублях</label>
+                <input type="number" name="price1" id="price1" value="%s">
+                <label for="price2">Цена в копейках</label>
+                <input type="number" name="price2" id="price2" value="%s">
+                <label for="description">Краткое описание</label>
+                <input type="text" name="description" id="description" value="%s">
+                <label for="language">Язык</label>
+                <input type="text" name="language" id="language" value="%s">
+                <label for="category">Категория</label>
+                <input type="text" name="category" id="category" value="%s">
+                <label for="image">Изображение</label>
+                <input type="file" name="image" id="image">
+                <label for="file">Файл с продуктом</label>
+                <input type="file" name="file" id="file">
+                <input type="submit" name="submitProduct" value="Обновить">
+            </form>
         </div>
         <div class="footer"></div>
     </div>
