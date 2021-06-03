@@ -15,16 +15,43 @@ class Controller
     private function get()
     {
         $admin = file_get_contents('../views/adminUsers.html');
+        $styles = '<link rel="stylesheet" href="/views/index.css">';
+        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
         $navigation = file_get_contents('../views/navigation.html');
         $adminNavigation = file_get_contents('../views/adminNavigation.html');
-        $usersTable = file_get_contents('../views/usersTable.html');
-        $this->model = new Model();
-        $this->model->select();
-        $users = '';
-        for ($i = 0; $i < count($this->model->users); $i++) {
-            $u = $this->model->users[$i];
-            $users .= sprintf(
-                $usersTable,
+        $admin = sprintf(
+            $admin,
+            $styles,
+            $navigation,
+            $adminNavigation,
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            ''
+        );
+        echo $admin;
+    }
+    private function post()
+    {
+        $admin = file_get_contents('../views/adminUsers.html');
+        $styles = '<link rel="stylesheet" href="/views/index.css">';
+        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
+        $navigation = file_get_contents('../views/navigation.html');
+        $adminNavigation = file_get_contents('../views/adminNavigation.html');
+        if (isset($_POST['submitId'])) {
+            $id = intval($_POST['id']);
+            $this->model = new Model();
+            $this->model->select($id);
+            $u = $this->model->user;
+            $admin = sprintf(
+                $admin,
+                $styles,
+                $navigation,
+                $adminNavigation,
                 $u->id,
                 $u->surname,
                 $u->name,
@@ -32,17 +59,21 @@ class Controller
                 $u->email,
                 $u->birthday,
                 $u->phoneNumber,
-                $u->login,
-                $u->password,
-                $u->a10
+                $u->login
             );
+            echo $admin;
+        } else if (isset($_POST['submitUser'])) {
+            $obj = $_POST;
+            if ($obj['phoneNumber'] !== '')
+                $obj['phoneNumber'] = intval($obj['phoneNumber']);
+            $obj['id'] = intval($obj['id']);
+            $this->model = new Model();
+            $this->model->update($obj);
+            header('Location: /controllers/adminUsers.php');
+        } else {
+            header('Location: /');
+            exit();
         }
-        $styles = '<link rel="stylesheet" href="/views/index.css">';
-        $admin = sprintf($admin, $styles, $navigation, $adminNavigation, $users);
-        echo $admin;
-    }
-    private function post()
-    {
     }
 }
 new Controller();

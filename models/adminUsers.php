@@ -3,32 +3,31 @@ require 'user.php';
 require_once 'database.php';
 class Model
 {
-    public $users;
-    public function select()
+    public User $user;
+    public function select(int $id)
     {
         $this->db = new Database();
         try {
             $this->db->mysqli->begin_transaction();
-            $result = $this->db->mysqli->query('SELECT * FROM user');
-            $this->users = [];
-            $i = 0;
+            $sql = 'SELECT * FROM user WHERE id = ?';
+            $stmt = $this->db->mysqli->prepare($sql);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
             if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $this->users[$i] = new UserArray();
-                    $this->users[$i]->id = $row['id'];
-                    $this->users[$i]->surname = $row['surname'];
-                    $this->users[$i]->name = $row['name'];
-                    $this->users[$i]->patronymic = $row['patronymic'];
-                    $this->users[$i]->email = $row['email'];
-                    $this->users[$i]->birthday = $row['birthday'];
-                    $this->users[$i]->phoneNumber = $row['phoneNumber'];
-                    $this->users[$i]->login = $row['login'];
-                    $this->users[$i]->password = $row['password'];
-                    $this->users[$i]->role = $row['role'];
-                    $this->users[$i]->a10 = '/controllers/admin.php?type=0';
-                    $i++;
-                }
+                $row = $result->fetch_assoc();
+            } else {
+                throw new mysqli_sql_exception();
             }
+            $this->user = new User();
+            $this->user->id = $row['id'];
+            $this->user->surname = $row['surname'];
+            $this->user->name = $row['name'];
+            $this->user->patronymic = $row['patronymic'];
+            $this->user->email = $row['email'];
+            $this->user->birthday = $row['birthday'];
+            $this->user->phoneNumber = $row['phoneNumber'];
+            $this->user->login = $row['login'];
             $this->db->mysqli->commit();
         } catch (mysqli_sql_exception $exception) {
             var_dump($exception);
@@ -44,8 +43,54 @@ class Model
             }
         }
     }
-    public function insert()
+    public function update($obj)
     {
+        $this->db = new Database();
+        try {
+            $this->db->mysqli->begin_transaction();
+            $stmt = $this->db->mysqli->prepare('SELECT * FROM user WHERE id = ?');
+            $stmt->bind_param('i', $obj['id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = null;
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+            } else {
+                throw new mysqli_sql_exception();
+            }
+            $stmt->close();
+            $sql = 'UPDATE `user` SET `surname` = ?, `name` = ?, `patronymic` = ?, `email` = ?, `birthday` = ?, `phoneNumber` = ?, `login` = ? WHERE `user`.`id` = ?';
+            $stmt = $this->db->mysqli->prepare($sql);
+            $columns = ['surname', 'name', 'patronymic', 'email', 'birthday', 'phoneNumber', 'login'];
+            foreach ($columns as $c) {
+                $obj[$c] = ($obj[$c] === '') ? $row[$c] : $obj[$c];
+            }
+            $stmt->bind_param(
+                'sssssisi',
+                $obj['surname'],
+                $obj['name'],
+                $obj['patronymic'],
+                $obj['email'],
+                $obj['birthday'],
+                $obj['phoneNumber'],
+                $obj['login'],
+                $obj['id']
+            );
+            $stmt->execute();
+            $this->db->mysqli->commit();
+        } catch (mysqli_sql_exception $exception) {
+            var_dump($exception);
+            $this->db->mysqli->rollback();
+            $error = true;
+        } finally {
+            if (isset($stmt))
+                $stmt->close();
+            $this->db->mysqli->close();
+            if (isset($error)) {
+                //header('Location: /');
+                exit();
+            }
+        }
     }
 }
 

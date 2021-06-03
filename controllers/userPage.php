@@ -46,6 +46,7 @@ class Controller
             $userPage,
             $styles,
             $navigation,
+            $u->id,
             $u->surname,
             $u->name,
             $u->patronymic,
