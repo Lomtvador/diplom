@@ -17,6 +17,7 @@ class Controller
         $login = file_get_contents('../views/login.html');
         $navigation = file_get_contents('../views/navigation.html');
         $styles = '<link rel="stylesheet" href="/views/index.css">';
+        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
         $login = sprintf($login, $styles, $navigation);
         echo $login;
     }

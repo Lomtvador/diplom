@@ -42,6 +42,7 @@ class Controller
             );
         }
         $styles = '<link rel="stylesheet" href="/views/index.css">';
+        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
         $cart = sprintf(
             $cart,
             $styles,

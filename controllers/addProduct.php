@@ -18,6 +18,7 @@ class Controller
         $navigation = file_get_contents('../views/navigation.html');
         $adminNavigation = file_get_contents('../views/adminNavigation.html');
         $styles = '<link rel="stylesheet" href="/views/index.css">';
+        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
         $admin = sprintf($admin, $styles, $navigation, $adminNavigation);
         echo $admin;
     }
