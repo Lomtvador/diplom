@@ -1,11 +1,13 @@
 label,
 input,
-button {
+button,
+select {
     display: block;
 }
 
 input,
-button {
+button,
+select {
     margin: 20px 0px;
     padding: 10px;
 }

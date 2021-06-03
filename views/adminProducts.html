@@ -21,7 +21,12 @@
                 <label for="id">Идентификатор</label>
                 <input type="number" name="id" id="id" value="%s">
                 <input type="submit" name="submitId" value="Подтвердить">
-                <label for="type">Тип</label>
+                <label for="type">Тип
+                    <ol>
+                        <li>Журнал</li>
+                        <li>Комикс</li>
+                    </ol>
+                </label>
                 <input type="number" name="type" id="type" value="%s">
                 <label for="pageCount">Количество страниц</label>
                 <input type="number" name="pageCount" id="pageCount" value="%s">
@@ -37,7 +42,15 @@
                 <input type="text" name="artist" id="artist" value="%s">
                 <label for="publicationDate">Дата выхода</label>
                 <input type="date" name="publicationDate" id="publicationDate" value="%s">
-                <label for="rating">Возрастное ограничение</label>
+                <label for="rating">Возрастное ограничение
+                    <ol>
+                        <li>0+</li>
+                        <li>6+</li>
+                        <li>12+</li>
+                        <li>16+</li>
+                        <li>18+</li>
+                    </ol>
+                </label>
                 <input type="number" name="rating" id="rating" value="%s">
                 <label for="price1">Цена в рублях</label>
                 <input type="number" name="price1" id="price1" value="%s">
@@ -47,7 +60,18 @@
                 <input type="text" name="description" id="description" value="%s">
                 <label for="language">Язык</label>
                 <input type="text" name="language" id="language" value="%s">
-                <label for="category">Категория</label>
+                <label for="category">Категория (одна из следующих)
+                    <ul>
+                        <li>Фантастика</li>
+                        <li>Боевик</li>
+                        <li>Драма</li>
+                        <li>Супергерои</li>
+                        <li>Бизнес</li>
+                        <li>Электроника</li>
+                        <li>Путешествие и туризм</li>
+                        <li>Наука</li>
+                    </ul>
+                </label>
                 <input type="text" name="category" id="category" value="%s">
                 <label for="image">Изображение</label>
                 <input type="file" name="image" id="image">

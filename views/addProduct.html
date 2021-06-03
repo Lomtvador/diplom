@@ -25,7 +25,10 @@
         <div class="pageWrap">
             <form method="post" enctype="multipart/form-data">
                 <label for="type">Тип</label>
-                <input type="number" name="type" id="type">
+                <select name="type" id="type">
+                    <option value="0">Журнал</option>
+                    <option value="1">Комикс</option>
+                </select>
                 <label for="pageCount">Количество страниц</label>
                 <input type="number" name="pageCount" id="pageCount">
                 <label for="publisher">Издатель</label>
@@ -41,7 +44,13 @@
                 <label for="publicationDate">Дата выхода</label>
                 <input type="date" name="publicationDate" id="publicationDate">
                 <label for="rating">Возрастное ограничение</label>
-                <input type="number" name="rating" id="rating">
+                <select name="rating" id="rating">
+                    <option value="0">0+</option>
+                    <option value="1">6+</option>
+                    <option value="2">12+</option>
+                    <option value="3">16+</option>
+                    <option value="4">18+</option>
+                </select>
                 <label for="price1">Цена в рублях</label>
                 <input type="number" name="price1" id="price1">
                 <label for="price2">Цена в копейках</label>
@@ -51,7 +60,16 @@
                 <label for="language">Язык</label>
                 <input type="text" name="language" id="language">
                 <label for="category">Категория</label>
-                <input type="text" name="category" id="category">
+                <select name="category" id="category">
+                    <option value="Фантастика">Фантастика</option>
+                    <option value="Боевик">Боевик</option>
+                    <option value="Драма">Драма</option>
+                    <option value="Супергерои">Супергерои</option>
+                    <option value="Бизнес">Бизнес</option>
+                    <option value="Электроника">Электроника</option>
+                    <option value="Путешествие и туризм">Путешествие и туризм</option>
+                    <option value="Наука">Наука</option>
+                </select>
                 <label for="image">Изображение</label>
                 <input type="file" name="image" id="image">
                 <label for="file">Файл с продуктом</label>
