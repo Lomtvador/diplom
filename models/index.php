@@ -97,7 +97,7 @@ class Model
                 $this->db->mysqli->commit();
             }
         } catch (mysqli_sql_exception $exception) {
-            var_dump($exception);
+            //var_dump($exception);
             $this->db->mysqli->rollback();
             $error = true;
         } finally {

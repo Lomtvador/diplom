@@ -14,6 +14,7 @@ class Controller
         $navigation = file_get_contents('../views/navigation.html');
         $this->model = new Model($id);
         $styles = '<link rel="stylesheet" href="/views/index.css">';
+        $styles .= '<link rel="stylesheet" href="/views/productInfo.css">';
         $m = $this->model;
         $productInfo = sprintf(
             $productInfo,

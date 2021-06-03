@@ -94,6 +94,18 @@ class Model
         $this->db = new Database();
         try {
             $this->db->mysqli->begin_transaction();
+            $sql = 'SELECT login FROM user WHERE login = ?';
+            $stmt = $this->db->mysqli->prepare($sql);
+            $stmt->bind_param('s', $obj['login']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+            if ($result->num_rows > 0) {
+                $login = $obj['login'];
+                $this->db->mysqli->rollback();
+                $this->db->mysqli->close();
+                new Message("Логин $login уже занят.");
+            }
             $stmt = $this->db->mysqli->prepare('SELECT * FROM user WHERE id = ?');
             $stmt->bind_param('i', $obj['id']);
             $stmt->execute();

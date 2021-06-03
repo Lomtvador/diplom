@@ -1,5 +1,6 @@
 <?php
 require '../models/userPage.php';
+require 'common.php';
 class Controller
 {
     private Model $model;
@@ -66,10 +67,8 @@ class Controller
             exit();
         }
         $obj = $_POST;
-        if ($obj['phoneNumber'] !== '')
-            $obj['phoneNumber'] = intval($obj['phoneNumber']);
-        if ($obj['password'] !== '')
-            $obj['password'] = password_hash($obj['password'], PASSWORD_ARGON2ID);
+        checkUser($obj, false);
+        $obj['password'] = password_hash($obj['password'], PASSWORD_ARGON2ID);
         $obj['id'] = intval($_SESSION['id']);
         $this->model = new Model();
         $this->model->update($obj);

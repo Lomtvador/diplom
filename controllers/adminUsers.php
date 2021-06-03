@@ -1,5 +1,6 @@
 <?php
 require '../models/adminUsers.php';
+require 'common.php';
 class Controller
 {
     private Model $model;
@@ -69,8 +70,7 @@ class Controller
             echo $admin;
         } else if (isset($_POST['submitUser'])) {
             $obj = $_POST;
-            if ($obj['phoneNumber'] !== '')
-                $obj['phoneNumber'] = intval($obj['phoneNumber']);
+            checkUser($obj, false);
             $obj['id'] = intval($obj['id']);
             $this->model = new Model();
             $this->model->update($obj);

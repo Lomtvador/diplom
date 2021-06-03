@@ -1,5 +1,6 @@
 <?php
 require '../models/register.php';
+require 'common.php';
 class Controller
 {
     private Model $model;
@@ -23,17 +24,8 @@ class Controller
     }
     private function post()
     {
-        $obj = [
-            'surname' => $_POST['surname'],
-            'name' => $_POST['name'],
-            'patronymic' => $_POST['patronymic'],
-            'email' => $_POST['email'],
-            'birthday' => $_POST['birthday'],
-            'phoneNumber' => $_POST['phoneNumber'],
-            'login' => $_POST['login'],
-            'password' => $_POST['password']
-        ];
-        $obj['phoneNumber'] = intval($obj['phoneNumber']);
+        $obj = $_POST;
+        checkUser($obj);
         $obj['password'] = password_hash($obj['password'], PASSWORD_ARGON2ID);
         $this->model = new Model($obj);
         header('Location: /controllers/login.php');
