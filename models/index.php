@@ -37,7 +37,7 @@ class Model
                 $sql .= ' DESC ';
             }
             $sql .= ' LIMIT ? OFFSET ? ';
-            $this->limit = 2;
+            $this->limit = 6;
             $offset = 2 * ($page - 1);
             $stmt = $this->db->mysqli->prepare($sql);
             if ($typesCount === 1) {

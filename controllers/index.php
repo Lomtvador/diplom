@@ -56,16 +56,18 @@ class Controller
         $pageCount = $this->model->productCount / $this->model->limit;
         $pageCount = intval(ceil($pageCount));
         $pages = '';
-        for ($i = 1; $i <= $pageCount; $i++) {
-            $link = '<a class="navLink %s" href="%s">%d</a>';
-            $class = '';
-            if ($i === $page)
-                $class = 'selected';
-            $query = $_GET;
-            $query['page'] = $i;
-            $query = http_build_query($query);
-            $query = '?' . $query;
-            $pages .= sprintf($link, $class, $query, $i);
+        if ($pageCount > 1) {
+            for ($i = 1; $i <= $pageCount; $i++) {
+                $link = '<a class="navLink %s" href="%s">%d</a>';
+                $class = '';
+                if ($i === $page)
+                    $class = 'selected';
+                $query = $_GET;
+                $query['page'] = $i;
+                $query = http_build_query($query);
+                $query = '?' . $query;
+                $pages .= sprintf($link, $class, $query, $i);
+            }
         }
 
         $index = sprintf($index, $styles, $navigation, $categories, $sort, $products, $pages);

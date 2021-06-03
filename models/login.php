@@ -4,6 +4,7 @@ class Model
 {
     public bool $logged;
     public int $id;
+    public int $role;
     public Database $db;
     private string $hash;
     function __construct(string $login, string $password)
@@ -11,13 +12,14 @@ class Model
         $this->db = new Database();
         try {
             $this->db->mysqli->begin_transaction();
-            $stmt = $this->db->mysqli->prepare('SELECT id, password FROM user WHERE login = ?');
+            $stmt = $this->db->mysqli->prepare('SELECT id, role, password FROM user WHERE login = ?');
             $stmt->bind_param('s', $login);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $this->id = $row['id'];
+                $this->role = $row['role'];
                 $this->hash = $row['password'];
                 $this->logged = password_verify($password, $this->hash);
             } else {

@@ -29,6 +29,7 @@ class Controller
         if ($this->model->logged) {
             session_start();
             $_SESSION['id'] = $this->model->id;
+            $_SESSION['role'] = $this->model->role;
             header('Location: /controllers/userPage.php');
         } else {
             header('Location: /controllers/login.php');
