@@ -90,6 +90,6 @@ class Model extends Product
         $this->category = $row['category'];
         $this->imagePath = $row['imagePath'];
         $this->filePath = $row['filePath'];
-        $this->cartAdd = '/controllers/cart.php?add=' . $this->id;
+        $this->cartAdd = '/controllers/cartAdd.php?id=' . $this->id;
     }
 }
