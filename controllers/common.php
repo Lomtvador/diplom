@@ -34,7 +34,11 @@ function checkUser(&$obj, bool $checkEmpty = true)
             new Message('Длина контактного номера телефона должна быть равна 11 и первая цифра должна быть 7 или 8');
         }
     }
-    if (!isEmpty($obj['password']) && !isEmpty($obj['passwordConfirm'])) {
+    if (isEmpty($obj['password']))
+        $obj['password'] = '';
+    if (isEmpty($obj['passwordConfirm']))
+        $obj['passwordConfirm'] = '';
+    if (!isEmpty($obj['password']) || !isEmpty($obj['passwordConfirm'])) {
         if ($obj['password'] !== $obj['passwordConfirm']) {
             new Message('Пароли не совпадают');
         }
