@@ -9,6 +9,27 @@ class Model
         $this->db = new Database();
         try {
             $this->db->mysqli->begin_transaction();
+            $sql = 'SELECT hidden FROM product WHERE id = ?';
+            $stmt = $this->db->mysqli->prepare($sql);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $hidden = boolval($row['hidden']);
+                if ($hidden) {
+                    $stmt->close();
+                    $this->db->mysqli->rollback();
+                    $this->db->mysqli->close();
+                    new Message('Товар скрыт');
+                }
+            } else {
+                $stmt->close();
+                $this->db->mysqli->rollback();
+                $this->db->mysqli->close();
+                new Message('Товар не найден');
+            }
+            $stmt->close();
             $sql = <<<EOT
             SELECT product.id
             FROM user, product, cart

@@ -88,4 +88,6 @@ function checkProduct(&$obj, bool $checkEmpty = true)
     if ($checkEmpty && !isset($_FILES['file'])) {
         new Message('Не задан файл товара');
     }
+
+    $obj['hidden'] = isset($obj['hidden']);
 }

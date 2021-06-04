@@ -45,6 +45,7 @@ class Controller
             '',
             '',
             '',
+            '',
             ''
         );
         echo $admin;
@@ -81,7 +82,8 @@ class Controller
                 $p->priceArray[1],
                 $p->description,
                 $p->language,
-                $p->category
+                $p->category,
+                $p->hidden ? 'checked' : ''
             );
             echo $admin;
         } else if (isset($_POST['submitProduct'])) {

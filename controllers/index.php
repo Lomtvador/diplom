@@ -23,7 +23,12 @@ class Controller
         if (isset($_GET['page']))
             $page = intval($_GET['page']);
 
-        $this->model = new Model($category, $sortParam, $asc, $page);
+        session_start();
+        $admin = false;
+        if (isset($_SESSION['id']) && $_SESSION['role'] === 0) {
+            $admin = true;
+        }
+        $this->model = new Model($category, $sortParam, $asc, $page, $admin);
         $products = '';
         for ($i = 0; $i < count($this->model->products); $i++) {
             $p = $this->model->products[$i];

@@ -17,4 +17,5 @@ class Product
     public $category;
     public $imagePath;
     public $filePath;
+    public $hidden;
 }

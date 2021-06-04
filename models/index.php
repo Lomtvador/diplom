@@ -7,13 +7,16 @@ class Model
     public $limit;
     public $productCount;
     private Database $db;
-    function __construct($category = '', $sort = 'id', $asc = true, $page = 1)
+    function __construct($category = '', $sort = 'id', $asc = true, $page = 1, bool $admin = false)
     {
         $this->db = new Database();
         $this->products = [];
         try {
             $this->db->mysqli->begin_transaction();
-            $sql = 'SELECT id, imagePath, rating, titleRussian, price FROM product';
+            if ($admin)
+                $sql = 'SELECT id, imagePath, rating, titleRussian, price FROM product';
+            else
+                $sql = 'SELECT id, imagePath, rating, titleRussian, price FROM product WHERE hidden = 0';
             $typesCount = 0;
             if ($category !== '') {
                 $sql .= ' WHERE category = ? ';

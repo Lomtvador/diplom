@@ -7,10 +7,10 @@ class Model
         $this->db = new Database();
         try {
             $this->db->mysqli->begin_transaction();
-            $sql = 'INSERT INTO `product` (`id`, `type`, `pageCount`, `publisher`, `titleRussian`, `titleOriginal`, `author`, `artist`, `publicationDate`, `rating`, `price`, `description`, `language`, `category`, `imagePath`, `filePath`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            $sql = 'INSERT INTO `product` (`id`, `type`, `pageCount`, `publisher`, `titleRussian`, `titleOriginal`, `author`, `artist`, `publicationDate`, `rating`, `price`, `description`, `language`, `category`, `imagePath`, `filePath`, `hidden`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
             $stmt = $this->db->mysqli->prepare($sql);
             $stmt->bind_param(
-                'iissssssissssss',
+                'iissssssissssssi',
                 $obj['type'],
                 $obj['pageCount'],
                 $obj['publisher'],
@@ -25,7 +25,8 @@ class Model
                 $obj['language'],
                 $obj['category'],
                 $obj['imagePath'],
-                $obj['filePath']
+                $obj['filePath'],
+                $obj['hidden']
             );
             $stmt->execute();
             $this->db->mysqli->commit();

@@ -36,6 +36,7 @@ class Model
             $this->product->description = $row['description'];
             $this->product->language = $row['language'];
             $this->product->category = $row['category'];
+            $this->product->hidden = $row['hidden'];
             $this->db->mysqli->commit();
         } catch (mysqli_sql_exception $exception) {
             var_dump($exception);
@@ -67,14 +68,14 @@ class Model
                 throw new mysqli_sql_exception();
             }
             $stmt->close();
-            $sql = 'UPDATE `product` SET `type` = ?, `pageCount` = ?, `publisher` = ?, `titleRussian` = ?, `titleOriginal` = ?, `author` = ?, `artist` = ?, `publicationDate` = ?, `rating` = ?, `price` = ?, `description` = ?, `language` = ?, `category` = ?, `imagePath` = ?, `filePath` = ? WHERE `product`.`id` = ?';
+            $sql = 'UPDATE `product` SET `type` = ?, `pageCount` = ?, `publisher` = ?, `titleRussian` = ?, `titleOriginal` = ?, `author` = ?, `artist` = ?, `publicationDate` = ?, `rating` = ?, `price` = ?, `description` = ?, `language` = ?, `category` = ?, `imagePath` = ?, `filePath` = ?, `hidden` = ? WHERE `product`.`id` = ?';
             $stmt = $this->db->mysqli->prepare($sql);
             $columns = ['type', 'pageCount', 'publisher', 'titleRussian', 'titleOriginal', 'author', 'artist', 'publicationDate', 'rating', 'price', 'description', 'language', 'category', 'imagePath', 'filePath'];
             foreach ($columns as $c) {
                 $obj[$c] = ($obj[$c] === '') ? $row[$c] : $obj[$c];
             }
             $stmt->bind_param(
-                'iissssssissssssi',
+                'iissssssissssssii',
                 $obj['type'],
                 $obj['pageCount'],
                 $obj['publisher'],
@@ -90,6 +91,7 @@ class Model
                 $obj['category'],
                 $obj['imagePath'],
                 $obj['filePath'],
+                $obj['hidden'],
                 $obj['id']
             );
             $stmt->execute();
