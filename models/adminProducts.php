@@ -39,7 +39,6 @@ class Model
             $this->product->hidden = $row['hidden'];
             $this->db->mysqli->commit();
         } catch (mysqli_sql_exception $exception) {
-            //var_dump($exception);
             $this->db->mysqli->rollback();
             $error = true;
         } finally {
@@ -105,7 +104,7 @@ class Model
                 $stmt->close();
             $this->db->mysqli->close();
             if (isset($error)) {
-                //header('Location: /');
+                header('Location: /');
                 exit();
             }
         }

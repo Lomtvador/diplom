@@ -44,7 +44,6 @@ class Model extends Product
                 $error = true;
             }
         } catch (mysqli_sql_exception $exception) {
-            var_dump($exception);
             $this->db->mysqli->rollback();
             $error = true;
         } finally {

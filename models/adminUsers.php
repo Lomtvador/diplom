@@ -30,7 +30,6 @@ class Model
             $this->user->login = $row['login'];
             $this->db->mysqli->commit();
         } catch (mysqli_sql_exception $exception) {
-            //var_dump($exception);
             $this->db->mysqli->rollback();
             $error = true;
         } finally {
@@ -91,7 +90,6 @@ class Model
             $stmt->execute();
             $this->db->mysqli->commit();
         } catch (mysqli_sql_exception $exception) {
-            //var_dump($exception);
             $this->db->mysqli->rollback();
             $error = true;
         } finally {

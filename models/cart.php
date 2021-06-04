@@ -81,7 +81,6 @@ class Model
             $this->a3 = '/controllers/cart.php';
             $this->db->mysqli->commit();
         } catch (mysqli_sql_exception $exception) {
-            var_dump($exception);
             $this->db->mysqli->rollback();
             $error = true;
         } finally {
@@ -121,7 +120,6 @@ class Model
             $stmt->execute();
             $this->db->mysqli->commit();
         } catch (mysqli_sql_exception $exception) {
-            var_dump($exception);
             $this->db->mysqli->rollback();
             $error = true;
         } finally {
@@ -129,7 +127,7 @@ class Model
                 $stmt->close();
             $this->db->mysqli->close();
             if (isset($error)) {
-                header('Location: /controllers/error.php?code=500');
+                header('Location: /');
                 exit();
             }
         }

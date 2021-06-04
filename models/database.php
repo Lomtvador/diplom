@@ -17,15 +17,10 @@ class Database
                 // имя БД
                 'website'
             );
-            // if ($this->mysqli->connect_errno) {
-            //     printf("Ошибка: %s\n", $this->mysqli->connect_error);
-            //     exit();
-            // }
             // Установка кодировки utf8mb4_unicode_ci
             $this->mysqli->set_charset('utf8mb4');
             $this->mysqli->query("SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';");
         } catch (mysqli_sql_exception $exception) {
-            var_dump($exception);
             exit();
         }
     }
