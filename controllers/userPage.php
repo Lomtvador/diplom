@@ -31,12 +31,13 @@ class Controller
         for ($i = 0; $i < count($this->model->products); $i++) {
             $p = $this->model->products[$i];
             $id = $p->id;
+            $filePath = '/controllers/download.php?id=' . $id;
             $products .= sprintf(
                 $product2,
                 $p->imagePath,
                 $p->titleRussian,
                 $p->rating,
-                $p->filePath
+                $filePath
             );
         }
 
