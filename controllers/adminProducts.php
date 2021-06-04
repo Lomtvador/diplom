@@ -1,5 +1,6 @@
 <?php
 require '../models/adminProducts.php';
+require 'common.php';
 class Controller
 {
     private Model $model;
@@ -84,6 +85,7 @@ class Controller
             );
             echo $admin;
         } else if (isset($_POST['submitProduct'])) {
+            checkProduct($obj, false);
             if (!(isset($_FILES['image']) && $_FILES['image']['size'] !== 0)) {
                 $obj['imagePath'] = '';
             } else {
@@ -127,10 +129,6 @@ class Controller
                 move_uploaded_file($_FILES['file']['tmp_name'], $filePath);
                 $obj['filePath'] = '/products/' . pathinfo($filePath, PATHINFO_BASENAME);
             }
-            $price = [];
-            $price[0] = intval($_POST['price1']);
-            $price[1] = intval($_POST['price2']);
-            $obj['price'] = $price[0] . '.' . $price[1];
             $this->model = new Model();
             $this->model->update($obj);
             header('Location: /controllers/adminProducts.php');

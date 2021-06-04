@@ -1,5 +1,6 @@
 <?php
 require '../models/addProduct.php';
+require 'common.php';
 class Controller
 {
     private Model $model;
@@ -24,6 +25,8 @@ class Controller
     }
     private function post()
     {
+        $obj = $_POST;
+        checkProduct($obj);
         $dt = new DateTime();
         $filename = $dt->format('Y_m_d_H_i_s_v');
         $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/images/';
@@ -57,11 +60,6 @@ class Controller
             $i++;
         } while (file_exists($filePath));
         move_uploaded_file($_FILES['file']['tmp_name'], $filePath);
-        $obj = $_POST;
-        $price = [];
-        $price[0] = intval($_POST['price1']);
-        $price[1] = intval($_POST['price2']);
-        $obj['price'] = $price[0] . '.' . $price[1];
         $obj['imagePath'] = '/images/' . pathinfo($imagePath, PATHINFO_BASENAME);
         $obj['filePath'] = '/products/' . pathinfo($filePath, PATHINFO_BASENAME);
         $this->model = new Model($obj);

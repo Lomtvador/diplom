@@ -40,3 +40,52 @@ function checkUser(&$obj, bool $checkEmpty = true)
         }
     }
 }
+function checkProduct(&$obj, bool $checkEmpty = true)
+{
+    $namesForm = ['type', 'pageCount', 'publisher', 'titleRussian', 'titleOriginal', 'author', 'artist', 'publicationDate', 'rating', 'price1', 'price2', 'description', 'language', 'category'];
+    $namesMessage = ['тип', 'количество страниц', 'издатель', 'название на русском языке', 'название на оригинальном языке', 'автор(ы)', 'художник(и)', 'дата выхода', 'возрастное ограничение', 'цена в рублях', 'цена в копейках', 'краткое описание', 'язык', 'категория'];
+    if ($checkEmpty) {
+        for ($i = 0; $i < count($namesForm); $i++) {
+            if (!isset($obj[$namesForm[$i]]) || trim($obj[$namesForm[$i]]) === '') {
+                $str = $namesMessage[$i];
+                new Message("Не заполнено следующее поле: $str");
+            }
+        }
+    }
+    if (!isEmpty($obj['type'])) {
+        $obj['type'] = intval($obj['type']);
+        if (!(0 <= $obj['type'] && $obj['type'] <= 1)) {
+            new Message('Тип может быть от 0 до 1 включительно');
+        }
+    }
+    if (!isEmpty($obj['pageCount'])) {
+        $obj['pageCount'] = intval($obj['pageCount']);
+        $d = DateTime::createFromFormat('Y-m-d', $obj['publicationDate']);
+        if (!($d && $d->format('Y-m-d') == $obj['publicationDate'])) {
+            new Message('Введена неправильная дата выхода: ' . $obj['publicationDate']);
+        }
+    }
+    if (!isEmpty($obj['rating'])) {
+        $obj['rating'] = intval($obj['rating']);
+        if (!(0 <= $obj['rating'] && $obj['rating'] <= 4)) {
+            new Message('Возрастное ограничение может быть только от 0 до 4 включительно');
+        }
+    }
+    if (!isEmpty($obj['price1']) && !isEmpty($obj['price2'])) {
+        $price = [];
+        $price[0] = intval($_POST['price1']);
+        $price[1] = intval($_POST['price2']);
+        if ($price[1] > 99) {
+            new Message('Копеек не может быть больше 99');
+        }
+        $obj['price'] = $price[0] . '.' . $price[1];
+    }
+
+    if ($checkEmpty && !isset($_FILES['image'])) {
+        new Message('Не задана картинка товара');
+    }
+
+    if ($checkEmpty && !isset($_FILES['file'])) {
+        new Message('Не задан файл товара');
+    }
+}
