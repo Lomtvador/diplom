@@ -6,7 +6,7 @@ class Model extends Product
 {
     public $cartAdd;
     private Database $db;
-    function __construct($id)
+    function __construct($id, bool $admin = false)
     {
         $this->db = new Database();
         $row = [];
@@ -18,13 +18,15 @@ class Model extends Product
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $hidden = boolval($row['hidden']);
-                if ($hidden) {
-                    $stmt->close();
-                    $this->db->mysqli->rollback();
-                    $this->db->mysqli->close();
-                    new Message('Товар скрыт');
+                if (!$admin) {
+                    $row = $result->fetch_assoc();
+                    $hidden = boolval($row['hidden']);
+                    if ($hidden) {
+                        $stmt->close();
+                        $this->db->mysqli->rollback();
+                        $this->db->mysqli->close();
+                        new Message('Товар скрыт');
+                    }
                 }
             } else {
                 $stmt->close();

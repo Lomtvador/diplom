@@ -12,7 +12,12 @@ class Controller
         $id = intval($_GET['id']);
         $productInfo = file_get_contents('../views/productInfo.html');
         $navigation = file_get_contents('../views/navigation.html');
-        $this->model = new Model($id);
+        session_start();
+        $admin = false;
+        if (isset($_SESSION['id']) && $_SESSION['role'] === 0) {
+            $admin = true;
+        }
+        $this->model = new Model($id, $admin);
         $styles = '<link rel="stylesheet" href="/views/index.css">';
         $styles .= '<link rel="stylesheet" href="/views/productInfo.css">';
         $m = $this->model;
