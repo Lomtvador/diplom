@@ -15,7 +15,7 @@ class Model
         try {
             $this->db->mysqli->begin_transaction();
             $sql = <<<EOT
-            SELECT product.id, imagePath, rating, titleRussian, price, status
+            SELECT product.id, imagePath, rating, publicationDate, category, titleRussian, price, status
             FROM user, product, cart
             WHERE user.id = cart.user
             AND product.id = cart.product
@@ -51,6 +51,8 @@ class Model
                         default:
                             $this->products[$i]->rating .= '18.png';
                     }
+                    $this->products[$i]->publicationDate = $row['publicationDate'];
+                    $this->products[$i]->category = $row['category'];
                     $this->products[$i]->titleRussian = $row['titleRussian'];
                     $this->products[$i]->price = explode('.', $row['price']);
                     $this->products[$i]->price[0] = intval($this->products[$i]->price[0]);

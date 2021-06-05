@@ -33,6 +33,8 @@ class Controller
                 $p->imagePath,
                 $p->titleRussian,
                 $p->rating,
+                $p->publicationDate,
+                $p->category,
                 $p->price[0],
                 $p->price[1],
                 $p->a6,

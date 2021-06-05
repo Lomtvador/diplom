@@ -13,7 +13,7 @@ class Model
         $this->products = [];
         try {
             $this->db->mysqli->begin_transaction();
-            $sql = 'SELECT id, imagePath, rating, titleRussian, price FROM product';
+            $sql = 'SELECT id, imagePath, rating, publicationDate, category, titleRussian, price FROM product';
             $typesCount = 0;
             if ($category !== '') {
                 $sql .= ' WHERE category = ? ';
@@ -22,7 +22,8 @@ class Model
 
                 $typesCount++;
             } else {
-                $sql .= ' WHERE hidden = 0';
+                if (!$admin)
+                    $sql .= ' WHERE hidden = 0';
             }
             $found = false;
             $result = $this->db->mysqli->query('SHOW COLUMNS FROM `product`');
@@ -76,6 +77,8 @@ class Model
                         default:
                             $this->products[$i]->rating .= '18.png';
                     }
+                    $this->products[$i]->publicationDate = $row['publicationDate'];
+                    $this->products[$i]->category = $row['category'];
                     $this->products[$i]->imagePath = $row['imagePath'];
                     $this->products[$i]->price = explode('.', $row['price']);
                     $this->products[$i]->price[0] = intval($this->products[$i]->price[0]);
@@ -90,9 +93,13 @@ class Model
                 $sql = 'SELECT COUNT(id) AS count FROM product';
                 if ($category !== '') {
                     $sql .= ' WHERE category = ? ';
+                    if (!$admin)
+                        $sql .= 'AND hidden = 0';
                     $stmt = $this->db->mysqli->prepare($sql);
                     $stmt->bind_param('s', $category);
                 } else {
+                    if (!$admin)
+                        $sql .= ' WHERE hidden = 0';
                     $stmt = $this->db->mysqli->prepare($sql);
                 }
                 $stmt->execute();

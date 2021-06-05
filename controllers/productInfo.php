@@ -39,6 +39,7 @@ class Controller
             $m->price[1],
             $m->description,
             $m->language,
+            $m->category,
             $m->cartAdd
         );
         echo $productInfo;
