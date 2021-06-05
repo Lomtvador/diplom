@@ -60,18 +60,62 @@ class Controller
         $styles = '<link rel="stylesheet" href="/views/index.css">';
         $pageCount = $this->model->productCount / $this->model->limit;
         $pageCount = intval(ceil($pageCount));
+        $temp = min($page, $pageCount);
+        $page = max($temp, 1);
+        if ($page !== $temp) {
+            header('Location: /');
+            exit();
+        }
         $pages = '';
         if ($pageCount > 1) {
-            for ($i = 1; $i <= $pageCount; $i++) {
-                $link = '<a class="navLink %s" href="%s">%d</a>';
-                $class = '';
-                if ($i === $page)
-                    $class = 'selected';
-                $query = $_GET;
-                $query['page'] = $i;
-                $query = http_build_query($query);
-                $query = '?' . $query;
-                $pages .= sprintf($link, $class, $query, $i);
+            if ($pageCount < 8) {
+                for ($i = 1; $i <= $pageCount; $i++) {
+                    $link = '<a class="navLink %s" href="%s">%d</a>';
+                    $class = '';
+                    if ($i === $page)
+                        $class = 'selected';
+                    $query = $_GET;
+                    $query['page'] = $i;
+                    $query = http_build_query($query);
+                    $query = '?' . $query;
+                    $pages .= sprintf($link, $class, $query, $i);
+                }
+            } else {
+                for ($i = 1; $i <= $pageCount; $i++) {
+                    if ($i === $page) {
+                        $pages .= <<<EOT
+                        <form class="pageInputWrap">
+                            <input type="number" class="pageInput" name="page" id="page" value=$page>
+                        </form>
+                        EOT;
+                    } else {
+                        $link = '<a class="navLink %s" href="%s">%d</a>';
+                        $class = '';
+                        $query = $_GET;
+                        $query['page'] = $i;
+                        $query = http_build_query($query);
+                        $query = '?' . $query;
+                        $pages .= sprintf($link, $class, $query, $i);
+                    }
+                    $j = 2;
+                    $k = 2;
+                    while ($page - $j < 2) {
+                        $j--;
+                        $k++;
+                    }
+                    while ($page + $k >= $pageCount) {
+                        $k--;
+                        $j++;
+                    }
+                    if ($i === 1) {
+                        $i = $page - $j - 1;
+                        continue;
+                    }
+                    if ($i === $pageCount)
+                        continue;
+                    if ($i === $page + $k)
+                        $i = $pageCount - 1;
+                }
             }
         }
 

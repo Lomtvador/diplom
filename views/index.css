@@ -14,6 +14,7 @@
 body {
     height: 100vh;
     width: 100vw;
+    min-width: 800px;
 }
 
 .page {
@@ -100,6 +101,7 @@ body {
 .product {
     transition: all 0.5s;
     /* background: rgba(15, 15, 15, 0.7); */
+    background: rgba(46, 53, 109, 0.2);
     border-radius: 20px 0px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -111,9 +113,15 @@ body {
     display: block;
 }
 
+.imageWrap {
+    background: white;
+    padding: 20px;
+    border-radius: 20px 0px;
+}
+
 .infoWrap {
-    border-top: 3px solid rgba(46, 53, 109, 0.5);
-    background: rgba(46, 53, 109, 0.2);
+    /* border-top: 3px solid rgba(46, 53, 109, 0.5); */
+    /* background: rgba(46, 53, 109, 0.2); */
     border-radius: 20px 0px;
     margin-top:20px;
     padding: 20px;
@@ -134,4 +142,29 @@ body {
 
 .cartAdd, .cartDelete, .productInfo, .download {
     color: rgb(46 53 109);
+}
+
+form.pageInputWrap {
+    display: flex;
+    flex-direction: row;
+}
+
+input.pageInput {
+    text-align: center;
+    background: rgb(20 30 50);
+    color: white;
+    -moz-appearance: textfield;
+	-webkit-appearance: textfield;
+	appearance: textfield;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 16px;
+    border: none;
+}
+input.pageInput::-webkit-outer-spin-button,
+input.pageInput::-webkit-inner-spin-button {
+	display: none;
+}
+input.pageInput:focus {
+    outline: none;
 }

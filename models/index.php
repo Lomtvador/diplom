@@ -13,14 +13,16 @@ class Model
         $this->products = [];
         try {
             $this->db->mysqli->begin_transaction();
-            if ($admin)
-                $sql = 'SELECT id, imagePath, rating, titleRussian, price FROM product';
-            else
-                $sql = 'SELECT id, imagePath, rating, titleRussian, price FROM product WHERE hidden = 0';
+            $sql = 'SELECT id, imagePath, rating, titleRussian, price FROM product';
             $typesCount = 0;
             if ($category !== '') {
                 $sql .= ' WHERE category = ? ';
+                if (!$admin)
+                    $sql .= 'AND hidden = 0';
+
                 $typesCount++;
+            } else {
+                $sql .= ' WHERE hidden = 0';
             }
             $found = false;
             $result = $this->db->mysqli->query('SHOW COLUMNS FROM `product`');
@@ -40,8 +42,8 @@ class Model
                 $sql .= ' DESC ';
             }
             $sql .= ' LIMIT ? OFFSET ? ';
-            $this->limit = 6;
-            $offset = 2 * ($page - 1);
+            $this->limit = 12;
+            $offset = $this->limit * ($page - 1);
             $stmt = $this->db->mysqli->prepare($sql);
             if ($typesCount === 1) {
                 $stmt->bind_param('sii', $category, $this->limit, $offset);
