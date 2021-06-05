@@ -86,7 +86,7 @@ class Controller
                 for ($i = 1; $i <= $pageCount; $i++) {
                     if ($i === $page) {
                         $pages .= <<<EOT
-                        <form class="pageInputWrap">
+                        <form class="pageInputWrap" id="pageForm">
                             <input type="number" class="pageInput" name="page" id="page" value=$page>
                         </form>
                         EOT;
