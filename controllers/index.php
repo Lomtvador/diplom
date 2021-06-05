@@ -61,7 +61,7 @@ class Controller
         $pageCount = $this->model->productCount / $this->model->limit;
         $pageCount = intval(ceil($pageCount));
         $temp = min($page, $pageCount);
-        $page = max($temp, 1);
+        $temp = max($temp, 1);
         if ($page !== $temp) {
             header('Location: /');
             exit();
