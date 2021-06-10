@@ -84,7 +84,19 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `surname`, `name`, `patronymic`, `email`, `birthday`, `phoneNumber`, `login`, `password`, `role`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin@lomt.tk', '2021-01-01', 70000000000, 'admin', '$argon2id$v=19$m=65536,t=4,p=1$djZYS09wNWNKMUREZFJsRg$ycHx7ojKO8wUgIIU/4nL09RNKFFnQ6HJQY0OVRsl8MU', 0);
+( -- Изменить здесь!
+1, -- идентификатор, не менять!
+'admin', -- фамилия
+'admin', -- имя
+'admin', -- отчество
+'admin@lomt.tk', -- email
+'2021-01-01', -- дата рождения
+70000000000, -- номер телефона
+'admin', -- логин
+-- пароль
+'$argon2id$v=19$m=65536,t=4,p=1$djZYS09wNWNKMUREZFJsRg$ycHx7ojKO8wUgIIU/4nL09RNKFFnQ6HJQY0OVRsl8MU',
+0 -- роль, 0 - администратор, 1 - обычный пользователь
+);
 
 -- --------------------------------------------------------
 
