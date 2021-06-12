@@ -168,3 +168,17 @@ input.pageInput::-webkit-inner-spin-button {
 input.pageInput:focus {
     outline: none;
 }
+
+.categoriesWrap label,
+.categoriesWrap input,
+.categoriesWrap button,
+.categoriesWrap select {
+    display: block;
+}
+
+.categoriesWrap input,
+.categoriesWrap button,
+.categoriesWrap select {
+    margin: 20px 0px;
+    padding: 10px;
+}

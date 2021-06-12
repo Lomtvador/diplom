@@ -26,6 +26,12 @@ function checkUser(&$obj, bool $checkEmpty = true)
         if (!($d && $d->format('Y-m-d') == $obj['birthday'])) {
             new Message('Введена неправильная дата рождения: ' . $obj['birthday']);
         }
+        $currentDay = new DateTime();
+        $diff = $currentDay->diff($d);
+        $age = $diff->y;
+        if ($age < 14) {
+            new Message('Покупки доступны только для лиц старше 14 лет');
+        }
     }
     if (!isEmpty($obj['phoneNumber'])) {
         $obj['phoneNumber'] = intval($obj['phoneNumber']);
@@ -34,6 +40,8 @@ function checkUser(&$obj, bool $checkEmpty = true)
             new Message('Длина контактного номера телефона должна быть равна 11 и первая цифра должна быть 7 или 8');
         }
     }
+    if (isEmpty($obj['patronymic']))
+        $obj['patronymic'] = '';
     if (isEmpty($obj['password']))
         $obj['password'] = '';
     if (isEmpty($obj['passwordConfirm']))
@@ -46,8 +54,8 @@ function checkUser(&$obj, bool $checkEmpty = true)
 }
 function checkProduct(&$obj, bool $checkEmpty = true)
 {
-    $namesForm = ['type', 'pageCount', 'publisher', 'titleRussian', 'titleOriginal', 'author', 'artist', 'publicationDate', 'rating', 'price1', 'price2', 'description', 'language', 'category'];
-    $namesMessage = ['тип', 'количество страниц', 'издатель', 'название на русском языке', 'название на оригинальном языке', 'автор(ы)', 'художник(и)', 'дата выхода', 'возрастное ограничение', 'цена в рублях', 'цена в копейках', 'краткое описание', 'язык', 'категория'];
+    $namesForm = ['pageCount', 'publisher', 'titleRussian', 'titleOriginal', 'author', 'artist', 'publicationDate', 'rating', 'price1', 'price2', 'description', 'language', 'category'];
+    $namesMessage = ['количество страниц', 'издатель', 'название на русском языке', 'название на оригинальном языке', 'автор(ы)', 'художник(и)', 'дата выхода', 'возрастное ограничение', 'цена в рублях', 'цена в копейках', 'краткое описание', 'язык', 'категория'];
     if ($checkEmpty) {
         for ($i = 0; $i < count($namesForm); $i++) {
             if (!isset($obj[$namesForm[$i]]) || trim($obj[$namesForm[$i]]) === '') {
@@ -56,11 +64,12 @@ function checkProduct(&$obj, bool $checkEmpty = true)
             }
         }
     }
-    if (!isEmpty($obj['type'])) {
-        $obj['type'] = intval($obj['type']);
-        if (!(0 <= $obj['type'] && $obj['type'] <= 1)) {
-            new Message('Тип может быть от 0 до 1 включительно');
-        }
+    if (in_array($obj['category'], array('Фантастика', 'Боевик', 'Драма', 'Супергерои'))) {
+        $obj['type'] = 1;
+    } else if (in_array($obj['category'], array('Бизнес', 'Электроника', 'Путешествие и туризм', 'Наука'))) {
+        $obj['type'] = 0;
+    } else {
+        new Message('Выбрана несуществующая категория: ' . $obj['category']);
     }
     if (!isEmpty($obj['pageCount'])) {
         $obj['pageCount'] = intval($obj['pageCount']);

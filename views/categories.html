@@ -1,20 +1,21 @@
 <div class="categoriesWrap">
-    <div class="comics">
-        <div class="typeHeading">Комиксы</div>
-        <div class="categories">
-            <a href="?category=Фантастика">Фантастика</a>
-            <a href="?category=Боевик">Боевик</a>
-            <a href="?category=Драма">Драма</a>
-            <a href="?category=Супергерои">Супергерои</a>
-        </div>
-    </div>
-    <div class="journals">
-        <div class="typeHeading">Журналы</div>
-        <div class="categories">
-            <a href="?category=Бизнес">Бизнес</a>
-            <a href="?category=Электроника">Электроника</a>
-            <a href="?category=Путешествие и туризм">Путешествие и туризм</a>
-            <a href="?category=Наука">Наука</a>
-        </div>
-    </div>
+    <form>
+        <label for="category">Выберите категорию</label>
+        <select name="category" id="category">
+            <option>Все</option>
+            <optgroup label="Комиксы">
+                <option>Фантастика</option>
+                <option>Боевик</option>
+                <option>Драма</option>
+                <option>Супергерои</option>
+            </optgroup>
+            <optgroup label="Журналы">
+                <option>Бизнес</option>
+                <option>Электроника</option>
+                <option>Путешествие и туризм</option>
+                <option>Наука</option>
+            </optgroup>
+        </select>
+        <input type="submit" value="Выбрать">
+    </form>
 </div>

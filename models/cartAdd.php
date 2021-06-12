@@ -60,6 +60,23 @@ class Model
                 $this->db->mysqli->close();
                 new Message('Продукт уже куплен, зайдите в личный кабинет');
             }
+            $sql = 'SELECT user.birthday, product.rating FROM user, product WHERE user.id = ? AND product.id = ?';
+            $stmt = $this->db->mysqli->prepare($sql);
+            $stmt->bind_param('ii', $user, $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+            $row = $result->fetch_assoc();
+            $rating = [0, 6, 12, 16, 18];
+            $birthday = DateTime::createFromFormat('Y-m-d', $row['birthday']);
+            $currentDay = new DateTime();
+            $diff = $currentDay->diff($birthday);
+            $age = $diff->y;
+            if ($age < $rating[$row['rating']]) {
+                $this->db->mysqli->rollback();
+                $this->db->mysqli->close();
+                new Message('Этот товар доступен только для лиц старше ' . $rating[$row['rating']] . " лет. Вам $age лет.");
+            }
             $sql = 'INSERT INTO `cart` (`id`, `status`, `user`, `product`) VALUES (NULL, 0, ?, ?)';
             $stmt = $this->db->mysqli->prepare($sql);
             $stmt->bind_param(

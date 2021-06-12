@@ -24,11 +24,6 @@
         </div>
         <div class="pageWrap">
             <form method="post" enctype="multipart/form-data">
-                <label for="type">Тип</label>
-                <select name="type" id="type">
-                    <option value="0">Журнал</option>
-                    <option value="1">Комикс</option>
-                </select>
                 <label for="pageCount">Количество страниц</label>
                 <input type="number" name="pageCount" id="pageCount" required>
                 <label for="publisher">Издатель</label>
@@ -61,14 +56,18 @@
                 <input type="text" name="language" id="language" required>
                 <label for="category">Категория</label>
                 <select name="category" id="category">
-                    <option value="Фантастика">Фантастика</option>
-                    <option value="Боевик">Боевик</option>
-                    <option value="Драма">Драма</option>
-                    <option value="Супергерои">Супергерои</option>
-                    <option value="Бизнес">Бизнес</option>
-                    <option value="Электроника">Электроника</option>
-                    <option value="Путешествие и туризм">Путешествие и туризм</option>
-                    <option value="Наука">Наука</option>
+                    <optgroup label="Журналы">
+                        <option value="Бизнес">Бизнес</option>
+                        <option value="Электроника">Электроника</option>
+                        <option value="Путешествие и туризм">Путешествие и туризм</option>
+                        <option value="Наука">Наука</option>
+                    </optgroup>
+                    <optgroup label="Комиксы">
+                        <option value="Фантастика">Фантастика</option>
+                        <option value="Боевик">Боевик</option>
+                        <option value="Драма">Драма</option>
+                        <option value="Супергерои">Супергерои</option>
+                    </optgroup>
                 </select>
                 <label for="image">Изображение</label>
                 <input type="file" name="image" id="image" required>

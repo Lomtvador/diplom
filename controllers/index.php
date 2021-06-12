@@ -14,7 +14,7 @@ class Controller
         $sortParam = 'id';
         $asc = true;
         $page = 1;
-        if (isset($_GET['category']))
+        if (isset($_GET['category']) && $_GET['category'] !== 'Все')
             $category = $_GET['category'];
         if (isset($_GET['sort']))
             $sortParam = $_GET['sort'];
@@ -121,7 +121,7 @@ class Controller
             }
         }
 
-        $index = sprintf($index, $styles, $navigation, $categories, $sort, $products, $pages);
+        $index = sprintf($index, $styles, $navigation, $sort, $categories, $products, $pages);
         echo $index;
     }
 }

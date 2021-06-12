@@ -121,7 +121,7 @@ class Model
             $stmt->close();
             $sql = 'UPDATE `user` SET `surname` = ?, `name` = ?, `patronymic` = ?, `email` = ?, `birthday` = ?, `phoneNumber` = ?, `login` = ?, `password` = ? WHERE `user`.`id` = ?';
             $stmt = $this->db->mysqli->prepare($sql);
-            $columns = ['surname', 'name', 'patronymic', 'email', 'birthday', 'phoneNumber', 'login', 'password'];
+            $columns = ['surname', 'name', 'email', 'birthday', 'phoneNumber', 'login', 'password'];
             foreach ($columns as $c) {
                 $obj[$c] = ($obj[$c] === '') ? $row[$c] : $obj[$c];
             }
