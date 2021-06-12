@@ -69,7 +69,8 @@ class Controller
         }
         $obj = $_POST;
         checkUser($obj, false);
-        $obj['password'] = password_hash($obj['password'], PASSWORD_ARGON2ID);
+        if ($obj['password'] !== '')
+            $obj['password'] = password_hash($obj['password'], PASSWORD_ARGON2ID);
         $obj['id'] = intval($_SESSION['id']);
         $this->model = new Model();
         $this->model->update($obj);
