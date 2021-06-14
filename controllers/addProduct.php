@@ -6,6 +6,11 @@ class Controller
     private Model $model;
     function __construct()
     {
+        session_start();
+        if (!isset($_SESSION['id']) || $_SESSION['role'] !== 0) {
+            header('Location: /controllers/login.php');
+            exit();
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $this->get();
         }
