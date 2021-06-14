@@ -20,72 +20,19 @@ class Controller
     }
     private function get()
     {
-        $admin = file_get_contents('../views/adminProducts.html');
-        $styles = '<link rel="stylesheet" href="/views/index.css">';
-        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
-        $navigation = file_get_contents('../views/navigation.html');
-        $adminNavigation = file_get_contents('../views/adminNavigation.html');
-        $admin = sprintf(
-            $admin,
-            $styles,
-            $navigation,
-            $adminNavigation,
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            ''
-        );
-        echo $admin;
+        $this->model = new Model();
+        $p = $this->model->product;
+        require '../views/adminProducts.php';
     }
     private function post()
     {
-        $admin = file_get_contents('../views/adminProducts.html');
-        $styles = '<link rel="stylesheet" href="/views/index.css">';
-        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
-        $navigation = file_get_contents('../views/navigation.html');
-        $adminNavigation = file_get_contents('../views/adminNavigation.html');
         $obj = $_POST;
         if (isset($_POST['submitId'])) {
             $id = intval($_POST['id']);
             $this->model = new Model();
             $this->model->select($id);
             $p = $this->model->product;
-            $admin = sprintf(
-                $admin,
-                $styles,
-                $navigation,
-                $adminNavigation,
-                $id,
-                $p->type,
-                $p->pageCount,
-                $p->publisher,
-                $p->titleRussian,
-                $p->titleOriginal,
-                $p->author,
-                $p->artist,
-                $p->publicationDate,
-                $p->rating,
-                $p->priceArray[0],
-                $p->priceArray[1],
-                $p->description,
-                $p->language,
-                $p->category,
-                $p->hidden ? 'checked' : ''
-            );
-            echo $admin;
+            require '../views/adminProducts.php';
         } else if (isset($_POST['submitProduct'])) {
             checkProduct($obj, false);
             if (!(isset($_FILES['image']) && $_FILES['image']['size'] !== 0)) {

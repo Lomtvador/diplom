@@ -3,23 +3,24 @@
 
 <head>
     <meta charset="utf-8">
-    <!-- стили -->
-    %s
+    <link rel="stylesheet" href="/views/index.css">
+    <link rel="stylesheet" href="/views/userPage.css">
     <title>Магазин</title>
 </head>
 
 <body>
     <div class="page">
         <div class="header">
-            <!-- navigation -->
-            %s
+            <?php require 'navigation.php'; ?>
         </div>
         <div class="pageWrap">
             <div class="products">
-                <!-- products -->
-                %s
+                <?php foreach ($products as $p) {
+                    require 'product.php';
+                }
+                ?>
             </div>
-            <h2>Итог: %d,%d ₽</h2>
+            <h2>Итог: <?= $price[0] ?>,<?= $price[1] ?> ₽</h2>
             <form method="post">
                 <input type="submit" value="Купить">
             </form>

@@ -4,6 +4,28 @@ require_once 'database.php';
 class Model
 {
     public ProductArray $product;
+    function __construct()
+    {
+        $this->product = new ProductArray();
+        $this->product->id = '';
+        $this->product->type = '';
+        $this->product->pageCount = '';
+        $this->product->publisher = '';
+        $this->product->titleRussian = '';
+        $this->product->titleOriginal = '';
+        $this->product->author = '';
+        $this->product->artist = '';
+        $this->product->publicationDate = '';
+        $this->product->rating = '';
+        $this->product->price = '';
+        $this->product->description = '';
+        $this->product->language = '';
+        $this->product->category = '';
+        $this->product->imagePath = '';
+        $this->product->filePath = '';
+        $this->product->hidden = '';
+        $this->product->priceArray = '';
+    }
     public function select(int $id)
     {
         $this->db = new Database();

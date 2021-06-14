@@ -15,12 +15,7 @@ class Controller
     }
     private function get()
     {
-        $register = file_get_contents('../views/register.html');
-        $navigation = file_get_contents('../views/navigation.html');
-        $styles = '<link rel="stylesheet" href="/views/index.css">';
-        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
-        $register = sprintf($register, $styles, $navigation);
-        echo $register;
+        require '../views/register.php';
     }
     private function post()
     {

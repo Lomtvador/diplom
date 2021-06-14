@@ -4,16 +4,14 @@
         <select name="category" id="category">
             <option>Все</option>
             <optgroup label="Комиксы">
-                <option>Фантастика</option>
-                <option>Боевик</option>
-                <option>Драма</option>
-                <option>Супергерои</option>
+                <?php foreach ($comics as $option) { ?>
+                    <option><?= $option ?></option>
+                <?php } ?>
             </optgroup>
             <optgroup label="Журналы">
-                <option>Бизнес</option>
-                <option>Электроника</option>
-                <option>Путешествие и туризм</option>
-                <option>Наука</option>
+                <?php foreach ($magazines as $option) { ?>
+                    <option><?= $option ?></option>
+                <?php } ?>
             </optgroup>
         </select>
         <input type="submit" value="Выбрать">

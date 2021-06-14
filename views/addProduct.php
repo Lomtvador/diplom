@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Магазин</title>
-    <!-- стили -->
-    %s
+    <link rel="stylesheet" href="/views/index.css">
+    <link rel="stylesheet" href="/views/userPage.css">
     <style>
         label,
         input {
@@ -17,10 +17,8 @@
 <body>
     <div class="page">
         <div class="header">
-            <!-- navigation -->
-            %s
-            <!-- adminNavigation -->
-            %s
+            <?php require 'navigation.php'; ?>
+            <?php require 'adminNavigation.php'; ?>
         </div>
         <div class="pageWrap">
             <form method="post" enctype="multipart/form-data">

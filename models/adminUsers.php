@@ -4,6 +4,20 @@ require_once 'database.php';
 class Model
 {
     public User $user;
+    function __construct()
+    {
+        $this->user = new User();
+        $this->user->id = '';
+        $this->user->surname = '';
+        $this->user->name = '';
+        $this->user->patronymic = '';
+        $this->user->email = '';
+        $this->user->birthday = '';
+        $this->user->phoneNumber = '';
+        $this->user->login = '';
+        $this->user->password = '';
+        $this->user->role = '';
+    }
     public function select(int $id)
     {
         $this->db = new Database();

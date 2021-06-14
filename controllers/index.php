@@ -5,11 +5,6 @@ class Controller
     private Model $model;
     function __construct()
     {
-        $index = file_get_contents('views/index.html');
-        $navigation = file_get_contents('views/navigation.html');
-        $categories = file_get_contents('views/categories.html');
-        $sort = file_get_contents('views/sort.html');
-        $product = file_get_contents('views/product.html');
         $category = '';
         $sortParam = 'id';
         $asc = true;
@@ -29,37 +24,29 @@ class Controller
             $admin = true;
         }
         $this->model = new Model($category, $sortParam, $asc, $page, $admin);
-        $products = '';
-        for ($i = 0; $i < count($this->model->products); $i++) {
-            $p = $this->model->products[$i];
-            $products .= sprintf(
-                $product,
-                $p->imagePath,
-                $p->titleRussian,
-                $p->rating,
-                $p->publicationDate,
-                $p->category,
-                $p->price[0],
-                $p->price[1],
-                $p->a6,
-                $p->a7,
-                $p->a8,
-                $p->a9
-            ); //↑
-        }
-        $sort = sprintf(
-            $sort,
-            !$asc,
-            '&category=' . $category,
-            ($asc) ?  '↓' : '↑',
-            !$asc,
-            '&category=' . $category,
-            ($asc) ?  '↓' : '↑',
-            !$asc,
-            '&category=' . $category,
-            ($asc) ?  '↓' : '↑'
-        );
-        $styles = '<link rel="stylesheet" href="/views/index.css">';
+        $products = $this->model->products;
+        $links = [
+            [
+                'sort' => 'price',
+                'asc' => $asc,
+                'category' => $category,
+                'text' => 'Цена'
+            ],
+            [
+                'sort' => 'publicationDate',
+                'asc' => $asc,
+                'category' => $category,
+                'text' => 'Дата выхода'
+            ],
+            [
+                'sort' => 'titleRussian',
+                'asc' => $asc,
+                'category' => $category,
+                'text' => 'Название на русском'
+            ]
+        ];
+        $comics = ['Фантастика', 'Боевик', 'Драма', 'Супергерои'];
+        $magazines = ['Бизнес', 'Электроника', 'Путешествие и туризм', 'Наука'];
         $pageCount = $this->model->productCount / $this->model->limit;
         $pageCount = intval(ceil($pageCount));
         $temp = min($page, $pageCount);
@@ -120,8 +107,6 @@ class Controller
                 }
             }
         }
-
-        $index = sprintf($index, $styles, $navigation, $sort, $categories, $products, $pages);
-        echo $index;
+        require 'views/index.php';
     }
 }

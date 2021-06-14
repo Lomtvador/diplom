@@ -3,30 +3,27 @@
 
 <head>
     <meta charset="utf-8">
-    <!-- стили -->
-    %s
+    <link rel="stylesheet" href="/views/index.css">
     <title>Магазин</title>
 </head>
 
 <body>
     <div class="page">
         <div class="header">
-            <!-- navigation -->
-            %s
+            <?php require 'navigation.php'; ?>
         </div>
-        <!-- sort -->
-        %s
+        <?php require 'sort.php'; ?>
         <div class="pageWrap">
-            <!-- categories -->
-            %s
+            <?php require 'categories.php'; ?>
             <div class="products">
-                <!-- products -->
-                %s
+                <?php foreach ($products as $p) {
+                    require 'product.php';
+                }
+                ?>
             </div>
         </div>
         <div class="navigation">
-            <!-- pages -->
-            %s
+            <?= $pages; ?>
         </div>
         <div class="footer"></div>
     </div>

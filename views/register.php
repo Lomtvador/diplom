@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Магазин</title>
-    <!-- стили -->
-    %s
+    <link rel="stylesheet" href="/views/index.css">
+    <link rel="stylesheet" href="/views/userPage.css">
     <style>
         label,
         input {
@@ -16,7 +16,9 @@
 
 <body>
     <div class="page">
-        <div class="header">%s</div>
+        <div class="header">
+            <?php require 'navigation.php'; ?>
+        </div>
         <div class="pageWrap">
             <form method="post">
                 <label for="surname">Фамилия</label>

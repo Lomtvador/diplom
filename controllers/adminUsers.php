@@ -20,54 +20,18 @@ class Controller
     }
     private function get()
     {
-        $admin = file_get_contents('../views/adminUsers.html');
-        $styles = '<link rel="stylesheet" href="/views/index.css">';
-        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
-        $navigation = file_get_contents('../views/navigation.html');
-        $adminNavigation = file_get_contents('../views/adminNavigation.html');
-        $admin = sprintf(
-            $admin,
-            $styles,
-            $navigation,
-            $adminNavigation,
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            ''
-        );
-        echo $admin;
+        $this->model = new Model();
+        $u = $this->model->user;
+        require '../views/adminUsers.php';
     }
     private function post()
     {
-        $admin = file_get_contents('../views/adminUsers.html');
-        $styles = '<link rel="stylesheet" href="/views/index.css">';
-        $styles .= '<link rel="stylesheet" href="/views/userPage.css">';
-        $navigation = file_get_contents('../views/navigation.html');
-        $adminNavigation = file_get_contents('../views/adminNavigation.html');
         if (isset($_POST['submitId'])) {
             $id = intval($_POST['id']);
             $this->model = new Model();
             $this->model->select($id);
             $u = $this->model->user;
-            $admin = sprintf(
-                $admin,
-                $styles,
-                $navigation,
-                $adminNavigation,
-                $u->id,
-                $u->surname,
-                $u->name,
-                $u->patronymic,
-                $u->email,
-                $u->birthday,
-                $u->phoneNumber,
-                $u->login
-            );
-            echo $admin;
+            require '../views/adminUsers.php';
         } else if (isset($_POST['submitUser'])) {
             $obj = $_POST;
             checkUser($obj, false);

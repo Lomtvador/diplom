@@ -4,10 +4,8 @@ class Message
     function __construct(string $message)
     {
         $seconds = 10;
-        $page = file_get_contents('../views/message.html');
-        $page = sprintf($page, $message, $seconds);
         header("Refresh:$seconds; url=/");
-        echo $page;
+        require '../views/message.php';
         exit();
     }
 }

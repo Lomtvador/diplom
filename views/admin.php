@@ -3,18 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <!-- стили -->
-    %s
+    <link rel="stylesheet" href="/views/index.css">
     <title>Магазин</title>
 </head>
 
 <body>
     <div class="page">
         <div class="header">
-            <!-- navigation -->
-            %s
-            <!-- adminNavigation -->
-            %s
+            <?php require 'navigation.php'; ?>
+            <?php require 'adminNavigation.php'; ?>
         </div>
         <div class="footer"></div>
     </div>
