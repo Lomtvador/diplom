@@ -99,6 +99,7 @@ class Model
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
+            unset($stmt);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 if (intval($row['id']) !== intval($obj['id'])) {
@@ -119,6 +120,7 @@ class Model
                 throw new mysqli_sql_exception();
             }
             $stmt->close();
+            unset($stmt);
             $sql = 'UPDATE `user` SET `surname` = ?, `name` = ?, `patronymic` = ?, `email` = ?, `birthday` = ?, `phoneNumber` = ?, `login` = ?, `password` = ? WHERE `user`.`id` = ?';
             $stmt = $this->db->mysqli->prepare($sql);
             $columns = ['surname', 'name', 'email', 'birthday', 'phoneNumber', 'login', 'password'];

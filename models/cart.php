@@ -42,6 +42,7 @@ class Model
                 }
             }
             $stmt->close();
+            unset($stmt);
             $sql = 'SELECT SUM(price) FROM product, cart WHERE cart.product = product.id AND cart.user = ?';
             $stmt = $this->db->mysqli->prepare($sql);
             $stmt->bind_param('i', $id);
@@ -86,6 +87,7 @@ class Model
             );
             $stmt->execute();
             $stmt->close();
+            unset($stmt);
             $sql = 'DELETE FROM cart WHERE user = ?';
             $stmt = $this->db->mysqli->prepare($sql);
             $stmt->bind_param(

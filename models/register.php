@@ -14,6 +14,7 @@ class Model
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
+            unset($stmt);
             if ($result->num_rows > 0) {
                 $login = $obj['login'];
                 $this->db->mysqli->rollback();

@@ -23,6 +23,7 @@ class Model extends Product
                     $hidden = boolval($row['hidden']);
                     if ($hidden) {
                         $stmt->close();
+                        unset($stmt);
                         $this->db->mysqli->rollback();
                         $this->db->mysqli->close();
                         new Message('Товар скрыт');
@@ -30,11 +31,13 @@ class Model extends Product
                 }
             } else {
                 $stmt->close();
+                unset($stmt);
                 $this->db->mysqli->rollback();
                 $this->db->mysqli->close();
                 new Message('Товар не найден');
             }
             $stmt->close();
+            unset($stmt);
             $stmt = $this->db->mysqli->prepare('SELECT * FROM product WHERE id = ?');
             $stmt->bind_param('i', $id);
             $stmt->execute();
@@ -49,7 +52,8 @@ class Model extends Product
             $this->db->mysqli->rollback();
             $error = true;
         } finally {
-            $stmt->close();
+            if (isset($stmt))
+                $stmt->close();
             $this->db->mysqli->close();
             if (isset($error)) {
                 header('Location: /');

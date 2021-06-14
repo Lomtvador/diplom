@@ -19,17 +19,20 @@ class Model
                 $hidden = boolval($row['hidden']);
                 if ($hidden) {
                     $stmt->close();
+                    unset($stmt);
                     $this->db->mysqli->rollback();
                     $this->db->mysqli->close();
                     new Message('Товар скрыт');
                 }
             } else {
                 $stmt->close();
+                unset($stmt);
                 $this->db->mysqli->rollback();
                 $this->db->mysqli->close();
                 new Message('Товар не найден');
             }
             $stmt->close();
+            unset($stmt);
             $sql = <<<EOT
             SELECT product.id
             FROM user, product, cart
@@ -44,17 +47,20 @@ class Model
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $stmt->close();
+                unset($stmt);
                 $this->db->mysqli->rollback();
                 $this->db->mysqli->close();
                 new Message('Товар уже есть в корзине');
             }
             $stmt->close();
+            unset($stmt);
             $sql = 'SELECT id FROM userproduct WHERE user = ? AND product = ?';
             $stmt = $this->db->mysqli->prepare($sql);
             $stmt->bind_param('ii', $user,  $id);
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
+            unset($stmt);
             if ($result->num_rows > 0) {
                 $this->db->mysqli->rollback();
                 $this->db->mysqli->close();
@@ -66,6 +72,7 @@ class Model
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
+            unset($stmt);
             $row = $result->fetch_assoc();
             $rating = [0, 6, 12, 16, 18];
             $birthday = DateTime::createFromFormat('Y-m-d', $row['birthday']);

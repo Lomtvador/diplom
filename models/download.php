@@ -27,6 +27,7 @@ class Model
                 $this->product->filePath = $row['filePath'];
             } else {
                 $stmt->close();
+                unset($stmt);
                 $this->db->mysqli->rollback();
                 $this->db->mysqli->close();
                 new Message('Товар не найден');

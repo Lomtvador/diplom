@@ -69,6 +69,7 @@ class Model
                     $i++;
                 }
                 $stmt->close();
+                unset($stmt);
                 $sql = 'SELECT COUNT(id) AS count FROM product';
                 if ($category !== '') {
                     $sql .= ' WHERE category = ? ';

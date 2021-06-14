@@ -32,6 +32,7 @@ class Model
                 $row = $result->fetch_assoc();
             } else {
                 $stmt->close();
+                unset($stmt);
                 $this->db->mysqli->rollback();
                 $this->db->mysqli->close();
                 new Message("Пользователь с логином $login не найден");
@@ -70,6 +71,7 @@ class Model
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
+            unset($stmt);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 if (intval($row['id']) !== intval($obj['id'])) {
@@ -85,6 +87,7 @@ class Model
             $result = $stmt->get_result();
             $row = null;
             $stmt->close();
+            unset($stmt);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
             } else {
