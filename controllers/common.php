@@ -44,6 +44,12 @@ function checkUser(&$obj, bool $checkEmpty = true)
         $obj['patronymic'] = '';
     if (isEmpty($obj['password']))
         $obj['password'] = '';
+    else {
+        $len = strlen($obj['password']);
+        if (!(10 <= $len && $len <= 50)) {
+            new Message('Длина пароля должна быть от 10 до 50 включительно');
+        }
+    }
     if (isEmpty($obj['passwordConfirm']))
         $obj['passwordConfirm'] = '';
     if (!isEmpty($obj['password']) || !isEmpty($obj['passwordConfirm'])) {
