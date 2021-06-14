@@ -56,37 +56,16 @@ class Model
             $i = 0;
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $id = $row['id'];
-                    $this->products[$i] = new ProductArray();
+                    $this->products[$i] = new Product();
+                    $this->products[$i]->id = $row['id'];
                     $this->products[$i]->titleRussian = $row['titleRussian'];
-                    $this->products[$i]->rating = '/images/rating/';
-                    switch ($row['rating']) {
-                        case 0:
-                            $this->products[$i]->rating .= '0.png';
-                            break;
-                        case 1:
-                            $this->products[$i]->rating .= '6.png';
-                            break;
-                        case 2:
-                            $this->products[$i]->rating .= '12.png';
-                            break;
-                        case 3:
-                            $this->products[$i]->rating .= '16.png';
-                            break;
-                        case 4:
-                        default:
-                            $this->products[$i]->rating .= '18.png';
-                    }
                     $this->products[$i]->publicationDate = $row['publicationDate'];
                     $this->products[$i]->category = $row['category'];
                     $this->products[$i]->imagePath = $row['imagePath'];
+                    $this->products[$i]->rating = $row['rating'];
                     $this->products[$i]->price = explode('.', $row['price']);
                     $this->products[$i]->price[0] = intval($this->products[$i]->price[0]);
                     $this->products[$i]->price[1] = intval($this->products[$i]->price[1]);
-                    $this->products[$i]->a6 = 'cartAdd';
-                    $this->products[$i]->a7 = "/controllers/cartAdd.php?id=$id";
-                    $this->products[$i]->a8 = 'Добавить в корзину';
-                    $this->products[$i]->a9 = "/controllers/productInfo.php?id=$id";
                     $i++;
                 }
                 $stmt->close();
@@ -121,11 +100,4 @@ class Model
             }
         }
     }
-}
-class ProductArray extends Product
-{
-    public $a6;
-    public $a7;
-    public $a8;
-    public $a9;
 }

@@ -5,9 +5,7 @@ class Model
 {
     public Database $db;
     public $products;
-    public $a1;
-    public $a2;
-    public $a3;
+    public $price;
     public function select(int $id)
     {
         $this->db = new Database();
@@ -29,39 +27,17 @@ class Model
             $i = 0;
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $this->products[$i] = new ProductArray();
+                    $this->products[$i] = new Product();
                     $this->products[$i]->id = $row['id'];
-                    $productid = $this->products[$i]->id;
                     $this->products[$i]->imagePath = $row['imagePath'];
-                    $this->products[$i]->rating = '/images/rating/';
-                    switch ($row['rating']) {
-                        case 0:
-                            $this->products[$i]->rating .= '0.png';
-                            break;
-                        case 1:
-                            $this->products[$i]->rating .= '6.png';
-                            break;
-                        case 2:
-                            $this->products[$i]->rating .= '12.png';
-                            break;
-                        case 3:
-                            $this->products[$i]->rating .= '16.png';
-                            break;
-                        case 4:
-                        default:
-                            $this->products[$i]->rating .= '18.png';
-                    }
                     $this->products[$i]->publicationDate = $row['publicationDate'];
                     $this->products[$i]->category = $row['category'];
                     $this->products[$i]->titleRussian = $row['titleRussian'];
+                    $this->products[$i]->rating = $row['rating'];
                     $this->products[$i]->price = explode('.', $row['price']);
                     $this->products[$i]->price[0] = intval($this->products[$i]->price[0]);
                     $this->products[$i]->price[1] = intval($this->products[$i]->price[1]);
                     $this->products[$i]->status = $row['status'];
-                    $this->products[$i]->a6 = 'cartDelete';
-                    $this->products[$i]->a7 = "/controllers/cartDelete.php?id=$productid";
-                    $this->products[$i]->a8 = 'Удалить из корзины';
-                    $this->products[$i]->a9 = "/controllers/productInfo.php?id=$productid";
                     $i++;
                 }
             }
@@ -73,14 +49,11 @@ class Model
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
             if (isset($row['SUM(price)']))
-                $price = explode('.', $row['SUM(price)']);
+                $this->price = explode('.', $row['SUM(price)']);
             else
-                $price = [0, 0];
-            $price[0] = intval($price[0]);
-            $price[1] = intval($price[1]);
-            $this->a1 = $price[0];
-            $this->a2 = $price[1];
-            $this->a3 = '/controllers/cart.php';
+                $this->price = [0, 0];
+            $this->price[0] = intval($this->price[0]);
+            $this->price[1] = intval($this->price[1]);
             $this->db->mysqli->commit();
         } catch (mysqli_sql_exception $exception) {
             $this->db->mysqli->rollback();
@@ -134,15 +107,4 @@ class Model
             }
         }
     }
-}
-
-class ProductArray extends Product
-{
-    public $status;
-    public $a4;
-    public $a5;
-    public $a6;
-    public $a7;
-    public $a8;
-    public $a9;
 }

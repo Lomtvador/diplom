@@ -33,7 +33,9 @@
                 Язык: <?= $p->language ?><br>
                 Категория: <?= $p->category ?> <br>
             </div>
-            <a class="cartAdd" href="/controllers/cartAdd.php?id=<?= $p->id ?>">Добавить в корзину</a>
+            <?php if (isset($_SESSION['id']) && $_SESSION['role'] !== 0) { ?>
+                <a class="cartAdd" href="/controllers/cartAdd.php?id=<?= $p->id ?>">Добавить в корзину</a>
+            <?php } ?>
         </div>
     </div>
 </body>

@@ -6,7 +6,7 @@ class Controller
     function __construct()
     {
         session_start();
-        if (!isset($_SESSION['id']) || !isset($_GET['id'])) {
+        if (!isset($_SESSION['id']) || $_SESSION['role'] === 0 || !isset($_GET['id'])) {
             header('Location: /controllers/cart.php');
             exit();
         }

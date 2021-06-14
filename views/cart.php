@@ -1,3 +1,4 @@
+<?php require_once 'common.php'; ?>
 <!doctype html>
 <html>
 
@@ -15,12 +16,15 @@
         </div>
         <div class="pageWrap">
             <div class="products">
-                <?php foreach ($products as $p) {
+                <?php
+                $class = 'cartDelete';
+                $text = 'Удалить из корзины';
+                foreach ($products as $p) {
                     require 'product.php';
                 }
                 ?>
             </div>
-            <h2>Итог: <?= $price[0] ?>,<?= $price[1] ?> ₽</h2>
+            <h2>Итог: <?= formatPrice($price); ?></h2>
             <form method="post">
                 <input type="submit" value="Купить">
             </form>

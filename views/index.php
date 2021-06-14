@@ -16,7 +16,10 @@
         <div class="pageWrap">
             <?php require 'categories.php'; ?>
             <div class="products">
-                <?php foreach ($products as $p) {
+                <?php
+                $class = 'cartAdd';
+                $text = 'Добавить в корзину';
+                foreach ($products as $p) {
                     require 'product.php';
                 }
                 ?>
