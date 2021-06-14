@@ -1,3 +1,4 @@
+<?php require_once 'common.php'; ?>
 <div class="product">
     <div class="imageWrap">
         <img class="image" src="<?= $p->imagePath ?>">
@@ -7,7 +8,7 @@
         <img class="rating" src="<?= $p->rating ?>">
         <div class="publicationDate"><?= $p->publicationDate ?></div>
         <div class="category"><?= $p->category ?></div>
-        <div class="price"><?= $p->price[0] ?>,<?= $p->price[1] ?> ₽</div>
+        <div class="price"><?= formatPrice($p->price) ?></div>
         <a class="<?= $p->a6 ?>" href="<?= $p->a7 ?>"><?= $p->a8 ?></a>
         <a class="productInfo" href="<?= $p->a9 ?>">Подробнее</a>
     </div>

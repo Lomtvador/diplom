@@ -1,3 +1,4 @@
+<?php require_once 'common.php'; ?>
 <!doctype html>
 <html>
 
@@ -27,7 +28,7 @@
                 Художник(и): <?= $p->artist ?> <br>
                 Дата выхода: <?= $p->publicationDate ?> <br>
                 Возрастное ограничение: <?= $p->rating ?> <br>
-                Цена: <?= $p->price[0] ?>,<?= $p->price[1] ?> ₽ <br>
+                Цена: <?= formatPrice($p->price) ?> <br>
                 Краткое Описание: <?= $p->description ?> <br>
                 Язык: <?= $p->language ?><br>
                 Категория: <?= $p->category ?> <br>
