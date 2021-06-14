@@ -16,9 +16,11 @@
         </div>
         <div class="pageWrap">
             <form method="post">
+                <label for="login">Логин</label>
+                <input type="text" name="login" id="login" value="<?= $u->login ?>" readonly onfocus="this.removeAttribute('readonly')">
+                <input type="submit" name="submitLogin" value="Подтвердить">
                 <label for="id">Идентификатор</label>
                 <input type="number" name="id" id="id" value="<?= $u->id ?>">
-                <input type="submit" name="submitId" value="Подтвердить">
                 <label for="surname">Фамилия</label>
                 <input type="text" name="surname" id="surname" value="<?= $u->surname ?>">
                 <label for="name">Имя</label>
@@ -31,8 +33,6 @@
                 <input type="date" name="birthday" id="birthday" value="<?= $u->birthday ?>">
                 <label for="phoneNumber">Номер телефона</label>
                 <input type="number" name="phoneNumber" id="phoneNumber" min="0" max="999999999999999" value="<?= $u->phoneNumber ?>">
-                <label for="login">Логин</label>
-                <input type="text" name="login" id="login" value="<?= $u->login ?>" readonly onfocus="this.removeAttribute('readonly')">
                 <input type="submit" name="submitUser" value="Обновить">
             </form>
         </div>

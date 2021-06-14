@@ -42,9 +42,9 @@
                     <option value="4">18+</option>
                 </select>
                 <label for="price1">Цена в рублях</label>
-                <input type="number" name="price1" id="price1" min="0" max="9999999999" step="1" value="<?= $p->priceArray[0] ?>">
+                <input type="number" name="price1" id="price1" min="0" max="9999999999" step="1" value="<?= $p->price[0] ?>">
                 <label for="price2">Цена в копейках</label>
-                <input type="number" name="price2" id="price2" min="0" max="99" step="1" value="<?= $p->priceArray[1] ?>">
+                <input type="number" name="price2" id="price2" min="0" max="99" step="1" value="<?= $p->price[1] ?>">
                 <label for="description">Краткое описание</label>
                 <input type="text" name="description" id="description" value="<?= $p->description ?>">
                 <label for="language">Язык</label>

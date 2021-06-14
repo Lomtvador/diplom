@@ -3,10 +3,10 @@ require 'product.php';
 require_once 'database.php';
 class Model
 {
-    public ProductArray $product;
+    public Product $product;
     function __construct()
     {
-        $this->product = new ProductArray();
+        $this->product = new Product();
         $this->product->id = '';
         $this->product->type = '';
         $this->product->pageCount = '';
@@ -36,12 +36,16 @@ class Model
             $stmt->bind_param('i', $id);
             $stmt->execute();
             $result = $stmt->get_result();
+            $stmt->close();
+            unset($stmt);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
             } else {
-                throw new mysqli_sql_exception();
+                $this->db->mysqli->rollback();
+                $this->db->mysqli->close();
+                new Message("Товар с идентификатором $id не найден");
             }
-            $this->product = new ProductArray();
+            $this->product = new Product();
             $this->product->id = $row['id'];
             $this->product->type = $row['type'];
             $this->product->pageCount = $row['pageCount'];
@@ -52,9 +56,9 @@ class Model
             $this->product->artist = $row['artist'];
             $this->product->publicationDate = $row['publicationDate'];
             $this->product->rating = $row['rating'];
-            $this->product->priceArray = explode('.', $row['price']);
-            $this->product->priceArray[0] = intval($this->product->priceArray[0]);
-            $this->product->priceArray[1] = intval($this->product->priceArray[1]);
+            $this->product->price = explode('.', $row['price']);
+            $this->product->price[0] = intval($this->product->price[0]);
+            $this->product->price[1] = intval($this->product->price[1]);
             $this->product->description = $row['description'];
             $this->product->language = $row['language'];
             $this->product->category = $row['category'];
@@ -83,12 +87,16 @@ class Model
             $stmt->execute();
             $result = $stmt->get_result();
             $row = null;
+            $stmt->close();
+            unset($stmt);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
             } else {
-                throw new mysqli_sql_exception();
+                $this->db->mysqli->rollback();
+                $this->db->mysqli->close();
+                $id = $obj['id'];
+                new Message("Товар с идентификатором $id не найден");
             }
-            $stmt->close();
             $sql = 'UPDATE `product` SET `type` = ?, `pageCount` = ?, `publisher` = ?, `titleRussian` = ?, `titleOriginal` = ?, `author` = ?, `artist` = ?, `publicationDate` = ?, `rating` = ?, `price` = ?, `description` = ?, `language` = ?, `category` = ?, `imagePath` = ?, `filePath` = ?, `hidden` = ? WHERE `product`.`id` = ?';
             $stmt = $this->db->mysqli->prepare($sql);
             $columns = ['type', 'pageCount', 'publisher', 'titleRussian', 'titleOriginal', 'author', 'artist', 'publicationDate', 'rating', 'price', 'description', 'language', 'category', 'imagePath', 'filePath'];
@@ -131,9 +139,4 @@ class Model
             }
         }
     }
-}
-
-class ProductArray extends Product
-{
-    public $priceArray;
 }

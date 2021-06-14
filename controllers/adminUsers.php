@@ -26,10 +26,10 @@ class Controller
     }
     private function post()
     {
-        if (isset($_POST['submitId'])) {
-            $id = intval($_POST['id']);
+        if (isset($_POST['submitLogin'])) {
+            $login = $_POST['login'];
             $this->model = new Model();
-            $this->model->select($id);
+            $this->model->select($login);
             $u = $this->model->user;
             require '../views/adminUsers.php';
         } else if (isset($_POST['submitUser'])) {

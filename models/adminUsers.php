@@ -18,20 +18,23 @@ class Model
         $this->user->password = '';
         $this->user->role = '';
     }
-    public function select(int $id)
+    public function select($login)
     {
         $this->db = new Database();
         try {
             $this->db->mysqli->begin_transaction();
-            $sql = 'SELECT * FROM user WHERE id = ?';
+            $sql = 'SELECT * FROM user WHERE `login` = ?';
             $stmt = $this->db->mysqli->prepare($sql);
-            $stmt->bind_param('i', $id);
+            $stmt->bind_param('s', $login);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
             } else {
-                throw new mysqli_sql_exception();
+                $stmt->close();
+                $this->db->mysqli->rollback();
+                $this->db->mysqli->close();
+                new Message("Пользователь с логином $login не найден");
             }
             $this->user = new User();
             $this->user->id = $row['id'];
@@ -81,12 +84,14 @@ class Model
             $stmt->execute();
             $result = $stmt->get_result();
             $row = null;
+            $stmt->close();
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
             } else {
-                throw new mysqli_sql_exception();
+                $this->db->mysqli->rollback();
+                $this->db->mysqli->close();
+                new Message('Пользователь с идентификатором ' . $obj['id'] . ' не найден');
             }
-            $stmt->close();
             $sql = 'UPDATE `user` SET `surname` = ?, `name` = ?, `patronymic` = ?, `email` = ?, `birthday` = ?, `phoneNumber` = ?, `login` = ? WHERE `user`.`id` = ?';
             $stmt = $this->db->mysqli->prepare($sql);
             $columns = ['surname', 'name', 'patronymic', 'email', 'birthday', 'phoneNumber', 'login'];
@@ -119,9 +124,4 @@ class Model
             }
         }
     }
-}
-
-class UserArray extends User
-{
-    public $a10;
 }

@@ -19,6 +19,9 @@
                 <img class="image" src="<?= $p->imagePath ?>">
             </div>
             <div class="info">
+                <?php if (isset($_SESSION['id']) && $_SESSION['role'] === 0) { ?>
+                    Идентификатор: <?= $p->id ?> <br>
+                <?php } ?>
                 Тип: <?= $p->type ?> <br>
                 Количество страниц: <?= $p->pageCount ?> <br>
                 Издатель: <?= $p->publisher ?> <br>
