@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/views/index.css">
+    <link rel="stylesheet" href="/views/common.css">
     <link rel="stylesheet" href="/views/productInfo.css">
     <title>Магазин</title>
 </head>
