@@ -11,11 +11,11 @@
 <body>
     <div class="page">
         <div class="header">
-            <?php require 'navigation.php'; ?>
-            <?php require 'adminNavigation.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/navigation.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/adminNavigation.php'; ?>
         </div>
         <div class="footer">
-            <?php require '../controllers/footer.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/footer.php'; ?>
         </div>
     </div>
 </body>

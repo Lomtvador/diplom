@@ -1,5 +1,5 @@
 <?php
-require_once 'message.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/message.php';
 function isEmpty(&$obj)
 {
     return !isset($obj) || trim($obj) === '';

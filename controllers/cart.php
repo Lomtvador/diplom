@@ -1,5 +1,5 @@
 <?php
-require '../models/cart.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/cart.php';
 class Controller
 {
     private Model $model;
@@ -24,7 +24,7 @@ class Controller
         $this->model->select($id);
         $products = $this->model->products;
         $price = $this->model->price;
-        require '../views/cart.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/cart.php';
     }
     private function post()
     {

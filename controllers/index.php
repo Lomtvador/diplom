@@ -1,5 +1,5 @@
 <?php
-require 'models/index.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/index.php';
 class Controller
 {
     private Model $model;
@@ -107,6 +107,6 @@ class Controller
                 }
             }
         }
-        require 'views/index.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/index.php';
     }
 }

@@ -1,6 +1,6 @@
 <?php
-require_once 'database.php';
-require_once 'message.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/message.php';
 class Model
 {
     private Database $db;

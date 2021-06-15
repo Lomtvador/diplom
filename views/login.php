@@ -11,7 +11,7 @@
 <body>
     <div class="page">
         <div class="header">
-            <?php require 'navigation.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/navigation.php'; ?>
         </div>
         <div class="pageWrap">
             <form method="post" target="_blank">
@@ -23,7 +23,7 @@
             </form>
         </div>
         <div class="footer">
-            <?php require '../controllers/footer.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/footer.php'; ?>
         </div>
     </div>
 </body>

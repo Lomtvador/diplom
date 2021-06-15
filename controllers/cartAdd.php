@@ -1,5 +1,5 @@
 <?php
-require '../models/cartAdd.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/cartAdd.php';
 class Controller
 {
     private Model $model;

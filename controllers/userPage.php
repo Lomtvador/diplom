@@ -1,6 +1,6 @@
 <?php
-require '../models/userPage.php';
-require 'common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/userPage.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/common.php';
 class Controller
 {
     private Model $model;
@@ -25,7 +25,7 @@ class Controller
         $this->model->select($id);
         $products = $this->model->products;
         $u = $this->model->user;
-        require '../views/userPage.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/userPage.php';
     }
     private function post()
     {

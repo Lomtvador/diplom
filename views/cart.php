@@ -1,4 +1,4 @@
-<?php require_once 'common.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/common.php'; ?>
 <!doctype html>
 <html>
 
@@ -12,7 +12,7 @@
 <body>
     <div class="page">
         <div class="header">
-            <?php require 'navigation.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/navigation.php'; ?>
         </div>
         <div class="pageWrap">
             <div class="products">
@@ -20,7 +20,7 @@
                 $class = 'cartDelete';
                 $text = 'Удалить из корзины';
                 foreach ($products as $p) {
-                    require 'product.php';
+                    require $_SERVER['DOCUMENT_ROOT'] . '/views/product.php';
                 }
                 ?>
             </div>
@@ -30,7 +30,7 @@
             </form>
         </div>
         <div class="footer">
-            <?php require '../controllers/footer.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/footer.php'; ?>
         </div>
     </div>
 </body>

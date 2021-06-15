@@ -1,6 +1,6 @@
 <?php
-require '../models/adminProducts.php';
-require 'common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/adminProducts.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/common.php';
 class Controller
 {
     private Model $model;
@@ -22,7 +22,7 @@ class Controller
     {
         $this->model = new Model();
         $p = $this->model->product;
-        require '../views/adminProducts.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/adminProducts.php';
     }
     private function post()
     {
@@ -32,7 +32,7 @@ class Controller
             $this->model = new Model();
             $this->model->select($id);
             $p = $this->model->product;
-            require '../views/adminProducts.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/views/adminProducts.php';
         } else if (isset($_POST['submitProduct'])) {
             checkProduct($obj, false);
             if (!(isset($_FILES['image']) && $_FILES['image']['size'] !== 0)) {

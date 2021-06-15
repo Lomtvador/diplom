@@ -1,5 +1,5 @@
 <?php
-require '../models/productInfo.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/productInfo.php';
 class Controller
 {
     private Model $model;
@@ -17,7 +17,7 @@ class Controller
         }
         $this->model = new Model($id, $admin);
         $p = $this->model;
-        require '../views/productInfo.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/productInfo.php';
     }
 }
 

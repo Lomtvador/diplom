@@ -1,6 +1,6 @@
 <?php
-require '../models/addProduct.php';
-require 'common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/addProduct.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/common.php';
 class Controller
 {
     private Model $model;
@@ -20,7 +20,7 @@ class Controller
     }
     private function get()
     {
-        require '../views/addProduct.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/addProduct.php';
     }
     private function post()
     {

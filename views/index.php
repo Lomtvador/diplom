@@ -10,17 +10,17 @@
 <body>
     <div class="page">
         <div class="header">
-            <?php require 'navigation.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/navigation.php'; ?>
         </div>
-        <?php require 'sort.php'; ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/sort.php'; ?>
         <div class="pageWrap">
-            <?php require 'categories.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/categories.php'; ?>
             <div class="products">
                 <?php
                 $class = 'cartAdd';
                 $text = 'Добавить в корзину';
                 foreach ($products as $p) {
-                    require 'product.php';
+                    require $_SERVER['DOCUMENT_ROOT'] . '/views/product.php';
                 }
                 ?>
             </div>
@@ -29,7 +29,7 @@
             <?= $pages; ?>
         </div>
         <div class="footer">
-            <?php require 'controllers/footer.php'; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/footer.php'; ?>
         </div>
     </div>
     <script src="/views/index.js"></script>

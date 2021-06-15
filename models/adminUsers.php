@@ -1,6 +1,6 @@
 <?php
-require 'user.php';
-require_once 'database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/user.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/database.php';
 class Model
 {
     public User $user;

@@ -7,7 +7,7 @@ class FooterController
     {
         $this->model = new FooterModel();
         $u = $this->model->user;
-        require $_SERVER['DOCUMENT_ROOT'] . '/views/footer.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/footer.php';
     }
 }
 new FooterController();

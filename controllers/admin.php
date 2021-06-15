@@ -8,7 +8,7 @@ class Controller
             header('Location: /controllers/login.php');
             exit();
         }
-        require '../views/admin.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/admin.php';
     }
 }
 new Controller();

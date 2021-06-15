@@ -1,6 +1,6 @@
 <?php
-require_once 'message.php';
-require '../models/download.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/message.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/download.php';
 class Controller
 {
     private Model $model;

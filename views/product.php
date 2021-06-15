@@ -1,5 +1,5 @@
 <?php
-require_once 'common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/views/common.php';
 $ratings = [0, 6, 12, 16, 18];
 $ratingImg = '/images/rating/' . $ratings[$p->rating] . '.png';
 ?>

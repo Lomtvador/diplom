@@ -1,6 +1,6 @@
 <?php
-require '../models/register.php';
-require 'common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/register.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/common.php';
 class Controller
 {
     private Model $model;
@@ -15,7 +15,7 @@ class Controller
     }
     private function get()
     {
-        require '../views/register.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/register.php';
     }
     private function post()
     {

@@ -1,5 +1,5 @@
 <?php
-require '../models/login.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/login.php';
 class Controller
 {
     private Model $model;
@@ -14,7 +14,7 @@ class Controller
     }
     private function get()
     {
-        require '../views/login.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/login.php';
     }
     private function post()
     {

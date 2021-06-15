@@ -5,7 +5,7 @@ class Message
     {
         $seconds = 10;
         header("Refresh:$seconds; url=/");
-        require '../views/message.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/message.php';
         exit();
     }
 }

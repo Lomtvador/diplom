@@ -1,6 +1,6 @@
 <?php
-require '../models/adminUsers.php';
-require 'common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/adminUsers.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/common.php';
 class Controller
 {
     private Model $model;
@@ -22,7 +22,7 @@ class Controller
     {
         $this->model = new Model();
         $u = $this->model->user;
-        require '../views/adminUsers.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/views/adminUsers.php';
     }
     private function post()
     {
@@ -31,7 +31,7 @@ class Controller
             $this->model = new Model();
             $this->model->select($login);
             $u = $this->model->user;
-            require '../views/adminUsers.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/views/adminUsers.php';
         } else if (isset($_POST['submitUser'])) {
             $obj = $_POST;
             checkUser($obj, false);
