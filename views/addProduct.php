@@ -15,7 +15,7 @@
             <?php require 'adminNavigation.php'; ?>
         </div>
         <div class="pageWrap">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" target="_blank">
                 <label for="pageCount">Количество страниц</label>
                 <input type="number" name="pageCount" id="pageCount" required>
                 <label for="publisher">Издатель</label>

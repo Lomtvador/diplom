@@ -14,7 +14,7 @@
             <?php require 'navigation.php'; ?>
         </div>
         <div class="pageWrap">
-            <form method="post">
+            <form method="post" target="_blank">
                 <label for="surname">Фамилия</label>
                 <input type="text" name="surname" id="surname" required>
                 <label for="name">Имя</label>

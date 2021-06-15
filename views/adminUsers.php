@@ -15,7 +15,7 @@
             <?php require 'adminNavigation.php'; ?>
         </div>
         <div class="pageWrap">
-            <form method="post">
+            <form method="post" target="_blank">
                 <label for="login">Логин</label>
                 <input type="text" name="login" id="login" value="<?= $u->login ?>" readonly onfocus="this.removeAttribute('readonly')">
                 <input type="submit" name="submitLogin" value="Подтвердить">

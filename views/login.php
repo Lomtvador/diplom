@@ -14,7 +14,7 @@
             <?php require 'navigation.php'; ?>
         </div>
         <div class="pageWrap">
-            <form method="post">
+            <form method="post" target="_blank">
                 <label for="login">Логин</label>
                 <input type="text" name="login" id="login" required>
                 <label for="password">Пароль</label>

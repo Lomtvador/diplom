@@ -15,7 +15,7 @@
             <?php require 'adminNavigation.php'; ?>
         </div>
         <div class="pageWrap">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" target="_blank">
                 <label for="id">Идентификатор</label>
                 <input type="number" name="id" id="id" value="<?= $p->id ?>">
                 <input type="submit" name="submitId" value="Подтвердить">
