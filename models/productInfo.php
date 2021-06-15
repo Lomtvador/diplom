@@ -4,8 +4,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/models/database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/controllers/message.php';
 class Model extends Product
 {
-    public $cartAdd;
     private Database $db;
+    public Product $product;
     function __construct($id, bool $admin = false)
     {
         $this->db = new Database();
@@ -60,40 +60,24 @@ class Model extends Product
                 exit();
             }
         }
-        $this->id = $row['id'];
-        $this->type = $row['type'] === '0' ? 'Журнал' : 'Комикс';
-        $this->pageCount = $row['pageCount'];
-        $this->publisher = $row['publisher'];
-        $this->titleRussian = $row['titleRussian'];
-        $this->titleOriginal = $row['titleOriginal'];
-        $this->author = $row['author'];
-        $this->artist = $row['artist'];
-        $this->publicationDate = $row['publicationDate'];
-        switch ($row['rating']) {
-            case 0:
-                $this->rating = '0+';
-                break;
-            case 1:
-                $this->rating = '6+';
-                break;
-            case 2:
-                $this->rating = '12+';
-                break;
-            case 3:
-                $this->rating = '16+';
-                break;
-            case 4:
-            default:
-                $this->rating = '18+';
-        }
-        $this->price = explode('.', $row['price']);
-        $this->price[0] = intval($this->price[0]);
-        $this->price[1] = intval($this->price[1]);
-        $this->description = $row['description'];
-        $this->language = $row['language'];
-        $this->category = $row['category'];
-        $this->imagePath = $row['imagePath'];
-        $this->filePath = $row['filePath'];
-        $this->cartAdd = '/controllers/cartAdd.php?id=' . $this->id;
+        $this->product = new Product();
+        $this->product->id = $row['id'];
+        $this->product->type = $row['type'] === '0' ? 'Журнал' : 'Комикс';
+        $this->product->pageCount = $row['pageCount'];
+        $this->product->publisher = $row['publisher'];
+        $this->product->titleRussian = $row['titleRussian'];
+        $this->product->titleOriginal = $row['titleOriginal'];
+        $this->product->author = $row['author'];
+        $this->product->artist = $row['artist'];
+        $this->product->publicationDate = $row['publicationDate'];
+        $this->product->rating = $row['rating'];
+        $this->product->price = explode('.', $row['price']);
+        $this->product->price[0] = intval($this->product->price[0]);
+        $this->product->price[1] = intval($this->product->price[1]);
+        $this->product->description = $row['description'];
+        $this->product->language = $row['language'];
+        $this->product->category = $row['category'];
+        $this->product->imagePath = $row['imagePath'];
+        $this->product->filePath = $row['filePath'];
     }
 }

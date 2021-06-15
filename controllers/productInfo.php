@@ -16,7 +16,7 @@ class Controller
             $admin = true;
         }
         $this->model = new Model($id, $admin);
-        $p = $this->model;
+        $p = $this->model->product;
         require_once $_SERVER['DOCUMENT_ROOT'] . '/views/productInfo.php';
     }
 }

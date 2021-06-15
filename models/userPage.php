@@ -51,24 +51,7 @@ class Model
                     $this->products[$i] = new Product();
                     $this->products[$i]->id = $row['id'];
                     $this->products[$i]->imagePath = $row['imagePath'];
-                    $this->products[$i]->rating = '/images/rating/';
-                    switch ($row['rating']) {
-                        case 0:
-                            $this->products[$i]->rating .= '0.png';
-                            break;
-                        case 1:
-                            $this->products[$i]->rating .= '6.png';
-                            break;
-                        case 2:
-                            $this->products[$i]->rating .= '12.png';
-                            break;
-                        case 3:
-                            $this->products[$i]->rating .= '16.png';
-                            break;
-                        case 4:
-                        default:
-                            $this->products[$i]->rating .= '18.png';
-                    }
+                    $this->products[$i]->rating = $row['rating'];
                     $this->products[$i]->titleRussian = $row['titleRussian'];
                     $this->products[$i]->filePath = $row['filePath'];
                     $i++;

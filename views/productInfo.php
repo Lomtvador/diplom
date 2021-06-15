@@ -1,4 +1,8 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/views/common.php'; ?>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/views/common.php';
+$ratings = [0, 6, 12, 16, 18];
+$rating = $ratings[$p->rating] . '+';
+?>
 <!doctype html>
 <html>
 
@@ -30,7 +34,7 @@
                 Оригинальное название: <?= $p->titleOriginal ?> <br>
                 Художник(и): <?= $p->artist ?> <br>
                 Дата выхода: <?= $p->publicationDate ?> <br>
-                Возрастное ограничение: <?= $p->rating ?> <br>
+                Возрастное ограничение: <?= $rating ?> <br>
                 Цена: <?= formatPrice($p->price) ?> <br>
                 Краткое Описание: <?= $p->description ?> <br>
                 Язык: <?= $p->language ?><br>
