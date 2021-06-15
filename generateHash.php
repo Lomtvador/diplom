@@ -1,8 +1,8 @@
 <?php
-if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/in.txt')) {
+if (!file_exists('in.txt')) {
     echo "Создайте файл in.txt рядом с этим скриптом и запишите туда пароль\n";
 } else {
-    $in = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/in.txt');
+    $in = file_get_contents('in.txt');
     $hash = password_hash($in, PASSWORD_ARGON2ID);
-    file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/out.txt', $hash . "\n");
+    file_put_contents('out.txt', $hash . "\n");
 }
