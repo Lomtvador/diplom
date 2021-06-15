@@ -11,7 +11,7 @@ class Model
         try {
             $this->db->mysqli->begin_transaction();
             $sql = <<<EOT
-            SELECT product.filePath FROM user, product, userproduct
+            SELECT product.filePath, product.titleRussian FROM user, product, userproduct
             WHERE userproduct.user = user.id
             AND userproduct.product = product.id
             AND userproduct.user = ?
@@ -25,6 +25,7 @@ class Model
                 $row = $result->fetch_assoc();
                 $this->product = new Product();
                 $this->product->filePath = $row['filePath'];
+                $this->product->titleRussian = $row['titleRussian'];
             } else {
                 $stmt->close();
                 unset($stmt);
