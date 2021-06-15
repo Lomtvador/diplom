@@ -53,7 +53,9 @@
                 ?>
             </div>
         </div>
-        <div class="footer"></div>
+        <div class="footer">
+            <?php require '../controllers/footer.php'; ?>
+        </div>
     </div>
     <script src="/views/userPage.js"></script>
 </body>

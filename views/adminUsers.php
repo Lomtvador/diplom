@@ -36,7 +36,9 @@
                 <input type="submit" name="submitUser" value="Обновить">
             </form>
         </div>
-        <div class="footer"></div>
+        <div class="footer">
+            <?php require '../controllers/footer.php'; ?>
+        </div>
     </div>
 </body>
 

@@ -70,7 +70,9 @@
                 <input type="submit" value="Добавить">
             </form>
         </div>
-        <div class="footer"></div>
+        <div class="footer">
+            <?php require '../controllers/footer.php'; ?>
+        </div>
     </div>
 </body>
 

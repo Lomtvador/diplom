@@ -28,7 +28,9 @@
         <div class="navigation">
             <?= $pages; ?>
         </div>
-        <div class="footer"></div>
+        <div class="footer">
+            <?php require 'controllers/footer.php'; ?>
+        </div>
     </div>
     <script src="/views/index.js"></script>
 </body>

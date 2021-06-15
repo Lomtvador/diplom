@@ -40,6 +40,9 @@
                 <a class="cartAdd" href="/controllers/cartAdd.php?id=<?= $p->id ?>">Добавить в корзину</a>
             <?php } ?>
         </div>
+        <div class="footer">
+            <?php require '../controllers/footer.php'; ?>
+        </div>
     </div>
 </body>
 

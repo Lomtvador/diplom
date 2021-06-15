@@ -36,7 +36,9 @@
                 <input type="submit" value="Зарегистрироваться">
             </form>
         </div>
-        <div class="footer"></div>
+        <div class="footer">
+            <?php require '../controllers/footer.php'; ?>
+        </div>
     </div>
 </body>
 

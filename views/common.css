@@ -182,3 +182,14 @@ input.pageInput:focus {
     margin: 20px 0px;
     padding: 10px;
 }
+
+.footer {
+    background: rgb(46 53 109);
+    padding: 20px;
+    margin-top: 40px;
+}
+.footer p {
+    color: white;
+    font-weight: 200;
+    font-style: normal;
+}

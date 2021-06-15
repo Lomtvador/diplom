@@ -73,7 +73,9 @@
                 <input type="submit" name="submitProduct" value="Обновить">
             </form>
         </div>
-        <div class="footer"></div>
+        <div class="footer">
+            <?php require '../controllers/footer.php'; ?>
+        </div>
     </div>
     <script src="/views/adminProducts.js"></script>
 </body>
