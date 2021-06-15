@@ -94,10 +94,13 @@ function checkProduct(&$obj, bool $checkEmpty = true)
         $price = [];
         $price[0] = intval($_POST['price1']);
         $price[1] = intval($_POST['price2']);
-        if ($price[1] > 99) {
-            new Message('Копеек не может быть больше 99');
+        if (!(0 <= $price[0] && $price[0] <= 9_999_999_999)) {
+            new Message('Рублей должно быть от 0 до 9 999 999 999 включительно');
         }
-        $obj['price'] = $price[0] . '.' . $price[1];
+        if (!(0 <= $price[1] && $price[1] <= 99)) {
+            new Message('Копеек должно быть от 0 до 99 включительно');
+        }
+        $obj['price'] = $price[0] . '.' . sprintf('%02d', $price[1]);
     }
 
     if ($checkEmpty && !isset($_FILES['image'])) {
